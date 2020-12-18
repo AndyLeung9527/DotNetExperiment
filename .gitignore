@@ -1,0 +1,4 @@
+AspNetExperiment/bin
+AspNetExperiment/obj
+/.vs
+*.log
