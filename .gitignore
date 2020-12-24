@@ -1,4 +1,6 @@
 AspNetExperiment/bin
 AspNetExperiment/obj
+AspNetAuth/obj
+AspNetAuth/bin
 /.vs
 *.log
