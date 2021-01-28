@@ -13,6 +13,7 @@ namespace AspNetAuth.Controllers
     public class CookieLoginController:Controller
     {
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Index(string account,string password)
         {
             if("AndyLeung".Equals(account) && "123456".Equals(password))
