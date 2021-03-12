@@ -2,5 +2,7 @@ AspNetExperiment/bin
 AspNetExperiment/obj
 AspNetAuth/obj
 AspNetAuth/bin
+AspNetAuthFilter/obj
+AspNetAuthFilter/bin
 /.vs
 *.log
