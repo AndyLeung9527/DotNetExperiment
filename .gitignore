@@ -1,8 +1,10 @@
 AspNetExperiment/bin
 AspNetExperiment/obj
-AspNetAuth/obj
 AspNetAuth/bin
-AspNetAuthFilter/obj
+AspNetAuth/obj
 AspNetAuthFilter/bin
+AspNetAuthFilter/obj
+AspNetAccessMySql/bin
+AspNetAccessMySql/obj
 /.vs
 *.log
