@@ -6,5 +6,7 @@ AspNetAuthFilter/bin
 AspNetAuthFilter/obj
 AspNetAccessMySql/bin
 AspNetAccessMySql/obj
+AspNetAccessMongoDB/bin
+AspNetAccessMongoDB/obj
 /.vs
 *.log
