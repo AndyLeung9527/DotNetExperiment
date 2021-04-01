@@ -18,5 +18,10 @@ namespace AspNetAccessMySql.DbContexts
         protected DbSet<test_user> test_user { get; set; }
 
         public erp_css(DbContextOptions options) : base(options) { }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseMySql("server=mysql-test.banggood.cn;userid=root;pwd=123456;port=3306;database=erp_css_new;sslmode=none;CharSet=utf8;");
+        //}
     }
 }
