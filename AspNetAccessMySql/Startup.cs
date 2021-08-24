@@ -25,7 +25,7 @@ namespace AspNetAccessMySql
         public void ConfigureServices(IServiceCollection services)
         {
             var erpCssConnectionString = _configuration.GetSection("ConnectionStrings").GetSection("erp_css").Value;
-            services.AddDbContextPool<erp_css>(dbContextOptions => dbContextOptions.UseMySql(erpCssConnectionString));
+            services.AddDbContextPool<erp_css>(dbContextOptions => dbContextOptions.UseMySql(erpCssConnectionString, MySqlServerVersion.LatestSupportedServerVersion));
             services.AddMvc();
         }
 

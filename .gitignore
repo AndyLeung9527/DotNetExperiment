@@ -8,5 +8,11 @@ AspNetAccessMySql/bin
 AspNetAccessMySql/obj
 AspNetAccessMongoDB/bin
 AspNetAccessMongoDB/obj
+AspNetRabbitMQ/AspNetRabbitMQ.ModeDemo/AspNetRabbitMQ.ModeDemo.Consumer/bin
+AspNetRabbitMQ/AspNetRabbitMQ.ModeDemo/AspNetRabbitMQ.ModeDemo.Consumer/obj
+AspNetRabbitMQ/AspNetRabbitMQ.ModeDemo/AspNetRabbitMQ.ModeDemo.Producer/bin
+AspNetRabbitMQ/AspNetRabbitMQ.ModeDemo/AspNetRabbitMQ.ModeDemo.Producer/obj
+AspNetRabbitMQ/AspNetRabbitMQ.ModeDemo/AspNetRabbitMQ.ModeDemo.Utils/bin
+AspNetRabbitMQ/AspNetRabbitMQ.ModeDemo/AspNetRabbitMQ.ModeDemo.Utils/obj
 /.vs
 *.log

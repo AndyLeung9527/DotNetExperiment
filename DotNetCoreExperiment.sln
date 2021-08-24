@@ -13,6 +13,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetAccessMySql", "AspNet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetAccessMongoDB", "AspNetAccessMongoDB\AspNetAccessMongoDB.csproj", "{B5E76DA8-9A60-464D-9C94-73B25C17A379}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AspNetRabbitMQ", "AspNetRabbitMQ", "{675D15BA-C19F-4FFF-BE5A-E1E7BFC924BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AspNetRabbitMQ.ModeDemo", "AspNetRabbitMQ.ModeDemo", "{04E998FF-8B87-49E3-BA02-646C4BB8BD9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetRabbitMQ.ModeDemo.Consumer", "AspNetRabbitMQ\AspNetRabbitMQ.ModeDemo\AspNetRabbitMQ.ModeDemo.Consumer\AspNetRabbitMQ.ModeDemo.Consumer.csproj", "{6F2547D7-BEF0-442F-B0AA-4E431C742ACC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetRabbitMQ.ModeDemo.Producer", "AspNetRabbitMQ\AspNetRabbitMQ.ModeDemo\AspNetRabbitMQ.ModeDemo.Producer\AspNetRabbitMQ.ModeDemo.Producer.csproj", "{D07C51B5-0859-44A7-9B3A-1E959A44D5EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetRabbitMQ.ModeDemo.Utils", "AspNetRabbitMQ\AspNetRabbitMQ.ModeDemo\AspNetRabbitMQ.ModeDemo.Utils\AspNetRabbitMQ.ModeDemo.Utils.csproj", "{E318CE52-2656-49B4-8084-6F45DFA79FF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,11 +49,29 @@ Global
 		{B5E76DA8-9A60-464D-9C94-73B25C17A379}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5E76DA8-9A60-464D-9C94-73B25C17A379}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5E76DA8-9A60-464D-9C94-73B25C17A379}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F2547D7-BEF0-442F-B0AA-4E431C742ACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F2547D7-BEF0-442F-B0AA-4E431C742ACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F2547D7-BEF0-442F-B0AA-4E431C742ACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F2547D7-BEF0-442F-B0AA-4E431C742ACC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D07C51B5-0859-44A7-9B3A-1E959A44D5EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D07C51B5-0859-44A7-9B3A-1E959A44D5EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D07C51B5-0859-44A7-9B3A-1E959A44D5EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D07C51B5-0859-44A7-9B3A-1E959A44D5EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E318CE52-2656-49B4-8084-6F45DFA79FF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E318CE52-2656-49B4-8084-6F45DFA79FF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E318CE52-2656-49B4-8084-6F45DFA79FF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E318CE52-2656-49B4-8084-6F45DFA79FF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2A6B72B4-0A0E-4CB4-8C72-65FA2178875B}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{04E998FF-8B87-49E3-BA02-646C4BB8BD9D} = {675D15BA-C19F-4FFF-BE5A-E1E7BFC924BA}
+		{6F2547D7-BEF0-442F-B0AA-4E431C742ACC} = {04E998FF-8B87-49E3-BA02-646C4BB8BD9D}
+		{D07C51B5-0859-44A7-9B3A-1E959A44D5EE} = {04E998FF-8B87-49E3-BA02-646C4BB8BD9D}
+		{E318CE52-2656-49B4-8084-6F45DFA79FF7} = {04E998FF-8B87-49E3-BA02-646C4BB8BD9D}
 	EndGlobalSection
 EndGlobal
