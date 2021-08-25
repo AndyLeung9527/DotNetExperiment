@@ -21,11 +21,14 @@ namespace AspNetRabbitMQ.ModeDemo.Utils
             };
             return connectionFactory.CreateConnection();
         }
-        public static string Exchange_3 => "Exchange_3";
+        public static string Exchange_1 => "Exchange_1";
         public static string Queue_1 => "Queue_1";
         public static string Queue_2 => "Queue_2";
-        public static string Queue_3_1 => "Queue_3_1";
-        public static string Queue_3_2 => "Queue_3_2";
-        public static string Queue_3_3 => "Queue_3_3";
+        public static string Queue_3 => "Queue_3";
+        public static string RoutingKey_1 => "RoutingKey_1";
+        public static string RoutingKey_Topic_1 => "RoutingKey.Topic.1";
+        public static string RoutingKey_Topic_2 => "RoutingKey.Topic.2";
+        public static string RoutingKey_Topic_Etc => "RoutingKey.Topic.#";
+        public static string RoutingKey_Topic_Publish => "RoutingKey.Topic.Publish";
     }
 }
