@@ -86,7 +86,7 @@ namespace AspNetRabbitMQ.ModeDemo.Producer
             //}
             #endregion
 
-            #region 重试 & 死信
+            #region 重试 & 死信(延迟)
             //using (var conn = RabbitMQHelper.GetConnection())
             //{
             //    using(var channel = conn.CreateModel())

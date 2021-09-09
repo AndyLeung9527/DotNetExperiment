@@ -115,7 +115,7 @@ namespace AspNetRabbitMQ.ModeDemo.Consumer
             //channel.BasicConsume(RabbitMQHelper.Queue_3, true, consumer);
             #endregion
 
-            #region 重试 & 死信
+            #region 重试 & 死信(延迟)
             //var conn = RabbitMQHelper.GetConnection();
             //var channel = conn.CreateModel();
             //channel.ExchangeDeclare(RabbitMQHelper.Exchange_1, ExchangeType.Direct);
