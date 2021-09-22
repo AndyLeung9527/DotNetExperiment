@@ -13,7 +13,7 @@ namespace AspNetRabbitMQ.ModeDemo.Utils
         {
             ConnectionFactory connectionFactory = new ConnectionFactory
             {
-                HostName = "172.16.6.35",
+                HostName = "172.16.6.40",
                 Port = 5672,
                 UserName = "admin",
                 Password = "admin",
@@ -34,7 +34,7 @@ namespace AspNetRabbitMQ.ModeDemo.Utils
             };
             IList<AmqpTcpEndpoint> lstEndpoint = new List<AmqpTcpEndpoint>
             {
-                new AmqpTcpEndpoint{ HostName = "172.16.6.35", Port = 5672 }
+                new AmqpTcpEndpoint{ HostName = "172.16.6.40", Port = 5672 }
             };
             if (isAsync)
                 connectionFactory.DispatchConsumersAsync = true;
@@ -44,6 +44,7 @@ namespace AspNetRabbitMQ.ModeDemo.Utils
         public static string Exchange_1 => "Exchange_1";
         public static string Exchane_Dead => "Exchane_Dead";
         public static string Exchange_Retry => "Exchange_Retry";
+        public static string Exchange_Backup => "Exchange_Backup";
         public static string Queue_1 => "Queue_1";
         public static string Queue_2 => "Queue_2";
         public static string Queue_3 => "Queue_3";
