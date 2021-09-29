@@ -14,5 +14,9 @@ AspNetRabbitMQ/AspNetRabbitMQ.ModeDemo/AspNetRabbitMQ.ModeDemo.Producer/bin
 AspNetRabbitMQ/AspNetRabbitMQ.ModeDemo/AspNetRabbitMQ.ModeDemo.Producer/obj
 AspNetRabbitMQ/AspNetRabbitMQ.ModeDemo/AspNetRabbitMQ.ModeDemo.Utils/bin
 AspNetRabbitMQ/AspNetRabbitMQ.ModeDemo/AspNetRabbitMQ.ModeDemo.Utils/obj
+AspNetKafka/AspNetKafka.Consumer/bin
+AspNetKafka/AspNetKafka.Consumer/obj
+AspNetKafka/AspNetKafka.Producer/bin
+AspNetKafka/AspNetKafka.Producer/obj
 /.vs
 *.log
