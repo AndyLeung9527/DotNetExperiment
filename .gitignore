@@ -18,5 +18,7 @@ AspNetKafka/AspNetKafka.Consumer/bin
 AspNetKafka/AspNetKafka.Consumer/obj
 AspNetKafka/AspNetKafka.Producer/bin
 AspNetKafka/AspNetKafka.Producer/obj
+AspNetElasticsearch/AspNetElasticsearch.BasicDemo/bin
+AspNetElasticsearch/AspNetElasticsearch.BasicDemo/obj
 /.vs
 *.log
