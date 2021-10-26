@@ -16,7 +16,6 @@ namespace AspNetExperiment
             ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
             {
                 builder.AddConsole();
-
             });
             CreateHostBuilder(args).Build().Run();
         }

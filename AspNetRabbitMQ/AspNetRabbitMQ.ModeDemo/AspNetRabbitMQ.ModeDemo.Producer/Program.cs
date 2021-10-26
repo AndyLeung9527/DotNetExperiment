@@ -1,9 +1,9 @@
-﻿using AspNetRabbitMQ.ModeDemo.Utils;
+﻿using DotNetRabbitMQ.ModeDemo.Utils;
 using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
 
-namespace AspNetRabbitMQ.ModeDemo.Producer
+namespace DotNetRabbitMQ.ModeDemo.Producer
 {
     /// <summary>
     /// 生产者

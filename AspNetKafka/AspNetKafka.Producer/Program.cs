@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Confluent.Kafka;
 
-namespace AspNetKafka.Producer
+namespace DotNetKafka.Producer
 {
     class Program
     {

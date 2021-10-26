@@ -13,25 +13,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetAccessMySql", "AspNet
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetAccessMongoDB", "AspNetAccessMongoDB\AspNetAccessMongoDB.csproj", "{B5E76DA8-9A60-464D-9C94-73B25C17A379}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AspNetRabbitMQ", "AspNetRabbitMQ", "{675D15BA-C19F-4FFF-BE5A-E1E7BFC924BA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetRabbitMQ", "DotNetRabbitMQ", "{675D15BA-C19F-4FFF-BE5A-E1E7BFC924BA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AspNetRabbitMQ.ModeDemo", "AspNetRabbitMQ.ModeDemo", "{04E998FF-8B87-49E3-BA02-646C4BB8BD9D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetRabbitMQ.ModeDemo", "DotNetRabbitMQ.ModeDemo", "{04E998FF-8B87-49E3-BA02-646C4BB8BD9D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetRabbitMQ.ModeDemo.Consumer", "AspNetRabbitMQ\AspNetRabbitMQ.ModeDemo\AspNetRabbitMQ.ModeDemo.Consumer\AspNetRabbitMQ.ModeDemo.Consumer.csproj", "{6F2547D7-BEF0-442F-B0AA-4E431C742ACC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetRabbitMQ.ModeDemo.Consumer", "AspNetRabbitMQ\AspNetRabbitMQ.ModeDemo\AspNetRabbitMQ.ModeDemo.Consumer\DotNetRabbitMQ.ModeDemo.Consumer.csproj", "{6F2547D7-BEF0-442F-B0AA-4E431C742ACC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetRabbitMQ.ModeDemo.Producer", "AspNetRabbitMQ\AspNetRabbitMQ.ModeDemo\AspNetRabbitMQ.ModeDemo.Producer\AspNetRabbitMQ.ModeDemo.Producer.csproj", "{D07C51B5-0859-44A7-9B3A-1E959A44D5EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetRabbitMQ.ModeDemo.Producer", "AspNetRabbitMQ\AspNetRabbitMQ.ModeDemo\AspNetRabbitMQ.ModeDemo.Producer\DotNetRabbitMQ.ModeDemo.Producer.csproj", "{D07C51B5-0859-44A7-9B3A-1E959A44D5EE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetRabbitMQ.ModeDemo.Utils", "AspNetRabbitMQ\AspNetRabbitMQ.ModeDemo\AspNetRabbitMQ.ModeDemo.Utils\AspNetRabbitMQ.ModeDemo.Utils.csproj", "{E318CE52-2656-49B4-8084-6F45DFA79FF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetRabbitMQ.ModeDemo.Utils", "AspNetRabbitMQ\AspNetRabbitMQ.ModeDemo\AspNetRabbitMQ.ModeDemo.Utils\DotNetRabbitMQ.ModeDemo.Utils.csproj", "{E318CE52-2656-49B4-8084-6F45DFA79FF7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AspNetKafka", "AspNetKafka", "{8E516DC7-0458-4062-81D8-29A8098A47D8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetKafka", "DotNetKafka", "{8E516DC7-0458-4062-81D8-29A8098A47D8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetKafka.Producer", "AspNetKafka\AspNetKafka.Producer\AspNetKafka.Producer.csproj", "{7C94E22D-30B0-42F9-9BDF-84BE893F07A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetKafka.Producer", "AspNetKafka\AspNetKafka.Producer\DotNetKafka.Producer.csproj", "{7C94E22D-30B0-42F9-9BDF-84BE893F07A6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetKafka.Consumer", "AspNetKafka\AspNetKafka.Consumer\AspNetKafka.Consumer.csproj", "{5852F30A-8E96-4AAE-92EB-672C48F7C681}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetKafka.Consumer", "AspNetKafka\AspNetKafka.Consumer\DotNetKafka.Consumer.csproj", "{5852F30A-8E96-4AAE-92EB-672C48F7C681}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AspNetElasticsearch", "AspNetElasticsearch", "{8E8E3D87-27F0-40A6-B086-766FB7C8FBF5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetElasticsearch", "DotNetElasticsearch", "{8E8E3D87-27F0-40A6-B086-766FB7C8FBF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetElasticsearch.BasicDemo", "AspNetElasticsearch\AspNetElasticsearch.BasicDemo\AspNetElasticsearch.BasicDemo.csproj", "{94361486-1958-4DBA-B9F5-589AE6BB2A5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetElasticsearch.BasicDemo", "AspNetElasticsearch\AspNetElasticsearch.BasicDemo\DotNetElasticsearch.BasicDemo.csproj", "{94361486-1958-4DBA-B9F5-589AE6BB2A5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

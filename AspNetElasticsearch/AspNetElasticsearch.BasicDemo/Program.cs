@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
-namespace AspNetElasticsearch.BasicDemo
+namespace DotNetElasticsearch.BasicDemo
 {
     class Program
     {

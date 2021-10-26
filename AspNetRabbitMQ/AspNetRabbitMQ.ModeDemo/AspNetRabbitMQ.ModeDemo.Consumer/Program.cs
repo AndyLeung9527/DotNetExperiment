@@ -1,11 +1,11 @@
-﻿using AspNetRabbitMQ.ModeDemo.Utils;
+﻿using DotNetRabbitMQ.ModeDemo.Utils;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AspNetRabbitMQ.ModeDemo.Consumer
+namespace DotNetRabbitMQ.ModeDemo.Consumer
 {
     /// <summary>
     /// 消费者

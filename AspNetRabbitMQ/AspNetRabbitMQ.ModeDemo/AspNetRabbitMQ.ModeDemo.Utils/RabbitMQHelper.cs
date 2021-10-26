@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AspNetRabbitMQ.ModeDemo.Utils
+namespace DotNetRabbitMQ.ModeDemo.Utils
 {
     public class RabbitMQHelper
     {
