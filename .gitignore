@@ -22,5 +22,8 @@ DotNetElasticsearch/DotNetElasticsearch.BasicDemo/bin
 DotNetElasticsearch/DotNetElasticsearch.BasicDemo/obj
 DotNetQuartz/DotNetQuartz.BasicDemo/bin
 DotNetQuartz/DotNetQuartz.BasicDemo/obj
+DotNetBenchmark/bin
+DotNetBenchmark/obj
+DotNetBenchmark/BenchmarkDotNet.Artifacts
 /.vs
 *.log
