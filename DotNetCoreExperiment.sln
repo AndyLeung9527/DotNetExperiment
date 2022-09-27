@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30804.86
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetExperiment", "AspNetExperiment\AspNetExperiment.csproj", "{B8842936-E698-4F7B-90A6-214EAB342B6C}"
 EndProject
@@ -35,15 +35,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetElasticsearch.BasicDe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetQuartz", "DotNetQuartz", "{4252FE37-268A-4EB3-8885-258181EF5513}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetQuartz.BasicDemo", "DotNetQuartz\DotNetQuartz.BasicDemo\DotNetQuartz.BasicDemo.csproj", "{70AD53F7-B642-40C7-B964-6797D7C362E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetQuartz.BasicDemo", "DotNetQuartz\DotNetQuartz.BasicDemo\DotNetQuartz.BasicDemo.csproj", "{70AD53F7-B642-40C7-B964-6797D7C362E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetBenchmark", "DotNetBenchmark\DotNetBenchmark.csproj", "{25E9337C-8E28-4EDA-872F-35F879B83069}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetBenchmark", "DotNetBenchmark\DotNetBenchmark.csproj", "{25E9337C-8E28-4EDA-872F-35F879B83069}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetAccessMySql", "DotNetAccessMySql", "{99BF732A-A8DA-4CE0-A3D3-2E72F95E4179}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetAccessMySql.CodeFirst", "DotNetAccessMySql\DotNetAccessMySql.CodeFirst\DotNetAccessMySql.CodeFirst.csproj", "{E0B68B41-6206-48CF-9A32-F6F44AF16EC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetAccessMySql.CodeFirst", "DotNetAccessMySql\DotNetAccessMySql.CodeFirst\DotNetAccessMySql.CodeFirst.csproj", "{E0B68B41-6206-48CF-9A32-F6F44AF16EC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetAccessMySql.DBFirst", "DotNetAccessMySql\DotNetAccessMySql.DBFirst\DotNetAccessMySql.DBFirst.csproj", "{10790436-5C9F-47AC-BA9B-E0787DFD2F56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetAccessMySql.DBFirst", "DotNetAccessMySql\DotNetAccessMySql.DBFirst\DotNetAccessMySql.DBFirst.csproj", "{10790436-5C9F-47AC-BA9B-E0787DFD2F56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetMediatR", "AspNetMediatR\AspNetMediatR.csproj", "{D3E5AE4D-9DF3-4B5F-9046-DA1231BDDDB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +113,10 @@ Global
 		{10790436-5C9F-47AC-BA9B-E0787DFD2F56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10790436-5C9F-47AC-BA9B-E0787DFD2F56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10790436-5C9F-47AC-BA9B-E0787DFD2F56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3E5AE4D-9DF3-4B5F-9046-DA1231BDDDB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3E5AE4D-9DF3-4B5F-9046-DA1231BDDDB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3E5AE4D-9DF3-4B5F-9046-DA1231BDDDB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3E5AE4D-9DF3-4B5F-9046-DA1231BDDDB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
