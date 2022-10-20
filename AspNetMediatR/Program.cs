@@ -14,7 +14,7 @@ app.MapGet("/", () => $"Ping's id is {r}");
 
 app.Run();
 
-#region µ¥²¥
+#region å•æ’­æ¶ˆæ¯
 public class Ping : IRequest<int>
 {
     public int Id { get; set; }
@@ -29,7 +29,7 @@ public class PingHandler : IRequestHandler<Ping, int>
 }
 #endregion
 
-#region ¶à²¥
+#region å¤šæ’­æ¶ˆæ¯
 public class Pinged : INotification
 {
     public int Id { get; set; }
