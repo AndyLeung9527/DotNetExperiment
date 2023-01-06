@@ -1,0 +1,20 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "DotNetOpenTelemetry.Microservice.Protos";
+
+package casual;
+
+// 服务定义
+service Casual{
+	rpc Transmit (TransmitRequest) returns (TransmitResult);
+}
+
+// 请求参数
+message TransmitRequest{
+	string content = 1;
+}
+
+// 返回结果
+message TransmitResult{
+	string result = 1;
+}

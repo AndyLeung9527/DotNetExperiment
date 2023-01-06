@@ -65,6 +65,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetOpenTelemetry.Web", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetOpenTelemetry.Console", "DotNetOpenTelemetry\DotNetOpenTelemetry.Console\DotNetOpenTelemetry.Console.csproj", "{E7BAAC6E-2FB4-4D9C-8459-88D971992919}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetOpenTelemetry.Microservice", "DotNetOpenTelemetry.Microservice", "{CE19401D-A5A6-4FD9-A42F-1C20CDF77937}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetOpenTelemetry.Microservice.WebApi1ToWebApi2", "DotNetOpenTelemetry\DotNetOpenTelemetry.Microservice\DotNetOpenTelemetry.Microservice.WebApi1ToWebApi2\DotNetOpenTelemetry.Microservice.WebApi1ToWebApi2.csproj", "{EFB9E235-D910-4263-B8F9-93C54DC1F1A7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetOpenTelemetry.Microservice.RabbitMQ4", "DotNetOpenTelemetry\DotNetOpenTelemetry.Microservice\DotNetOpenTelemetry.Microservice.RabbitMQ4\DotNetOpenTelemetry.Microservice.RabbitMQ4.csproj", "{F8BA225E-63D8-4BEC-B5C0-20A7FE24AB81}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetOpenTelemetry.Microservice.WebApi2ToGrpc3", "DotNetOpenTelemetry\DotNetOpenTelemetry.Microservice\DotNetOpenTelemetry.Microservice.WebApi2ToGrpc3\DotNetOpenTelemetry.Microservice.WebApi2ToGrpc3.csproj", "{D4E626C3-758A-46C0-A743-A0874220DF23}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetOpenTelemetry.Microservice.Grpc3ToRabbitMQ4", "DotNetOpenTelemetry\DotNetOpenTelemetry.Microservice\DotNetOpenTelemetry.Microservice.Grpc3ToRabbitMQ4\DotNetOpenTelemetry.Microservice.Grpc3ToRabbitMQ4.csproj", "{7AC3AD64-0CB8-4D77-9A63-33AA83732B97}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,6 +169,22 @@ Global
 		{E7BAAC6E-2FB4-4D9C-8459-88D971992919}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7BAAC6E-2FB4-4D9C-8459-88D971992919}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7BAAC6E-2FB4-4D9C-8459-88D971992919}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFB9E235-D910-4263-B8F9-93C54DC1F1A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFB9E235-D910-4263-B8F9-93C54DC1F1A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFB9E235-D910-4263-B8F9-93C54DC1F1A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFB9E235-D910-4263-B8F9-93C54DC1F1A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8BA225E-63D8-4BEC-B5C0-20A7FE24AB81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8BA225E-63D8-4BEC-B5C0-20A7FE24AB81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8BA225E-63D8-4BEC-B5C0-20A7FE24AB81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8BA225E-63D8-4BEC-B5C0-20A7FE24AB81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4E626C3-758A-46C0-A743-A0874220DF23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4E626C3-758A-46C0-A743-A0874220DF23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4E626C3-758A-46C0-A743-A0874220DF23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4E626C3-758A-46C0-A743-A0874220DF23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AC3AD64-0CB8-4D77-9A63-33AA83732B97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AC3AD64-0CB8-4D77-9A63-33AA83732B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AC3AD64-0CB8-4D77-9A63-33AA83732B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AC3AD64-0CB8-4D77-9A63-33AA83732B97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -180,6 +206,11 @@ Global
 		{3BEB0577-B6D6-4881-A2BC-4151182E008B} = {9849F045-2409-4649-A8E7-794456C8A39C}
 		{6D525934-BB77-4328-B3AB-C032122C7D67} = {0F1A402B-92DB-4E9C-9FCA-F40221BC88E5}
 		{E7BAAC6E-2FB4-4D9C-8459-88D971992919} = {0F1A402B-92DB-4E9C-9FCA-F40221BC88E5}
+		{CE19401D-A5A6-4FD9-A42F-1C20CDF77937} = {0F1A402B-92DB-4E9C-9FCA-F40221BC88E5}
+		{EFB9E235-D910-4263-B8F9-93C54DC1F1A7} = {CE19401D-A5A6-4FD9-A42F-1C20CDF77937}
+		{F8BA225E-63D8-4BEC-B5C0-20A7FE24AB81} = {CE19401D-A5A6-4FD9-A42F-1C20CDF77937}
+		{D4E626C3-758A-46C0-A743-A0874220DF23} = {CE19401D-A5A6-4FD9-A42F-1C20CDF77937}
+		{7AC3AD64-0CB8-4D77-9A63-33AA83732B97} = {CE19401D-A5A6-4FD9-A42F-1C20CDF77937}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2A6B72B4-0A0E-4CB4-8C72-65FA2178875B}

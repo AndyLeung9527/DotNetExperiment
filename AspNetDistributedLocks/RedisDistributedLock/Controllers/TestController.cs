@@ -28,7 +28,7 @@ public class TestController : ControllerBase
         var stockNum = (long)(await _redisConn.GetDatabase(0).StringGetAsync(_stockKey));
         if (stockNum > 0)
         {
-            var redisLock = _redisConn.GetDatabase(0).KeyExistsAsync()
+            var redisLock = _redisConn.GetDatabase(0).KeyExistsAsync();
             stockNum -= 1;
             var result = await _redisConn.GetDatabase(0).StringSetAsync(_stockKey, stockNum);
             return Content(result.ToString());
