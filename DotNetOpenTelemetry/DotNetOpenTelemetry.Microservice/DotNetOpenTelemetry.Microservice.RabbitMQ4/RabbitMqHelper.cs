@@ -15,8 +15,8 @@ public static class RabbitMqHelper
         _connectionFactory = new ConnectionFactory
         {
             HostName = "192.168.2.113",
-            UserName = "admin",
-            Password = "admin",
+            UserName = "guest",
+            Password = "guest",
             Port = 5672,
             RequestedConnectionTimeout = TimeSpan.FromSeconds(3),
             VirtualHost = "/"
