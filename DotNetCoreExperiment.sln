@@ -75,8 +75,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetOpenTelemetry.Microse
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetOpenTelemetry.Microservice.Grpc3ToRabbitMQ4", "DotNetOpenTelemetry\DotNetOpenTelemetry.Microservice\DotNetOpenTelemetry.Microservice.Grpc3ToRabbitMQ4\DotNetOpenTelemetry.Microservice.Grpc3ToRabbitMQ4.csproj", "{7AC3AD64-0CB8-4D77-9A63-33AA83732B97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetSnowflakeId", "DotNetSnowflakeId\DotNetSnowflakeId.csproj", "{E3F986EB-0268-4796-A9B6-3D1AA4EE9D55}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -187,10 +185,6 @@ Global
 		{7AC3AD64-0CB8-4D77-9A63-33AA83732B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AC3AD64-0CB8-4D77-9A63-33AA83732B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AC3AD64-0CB8-4D77-9A63-33AA83732B97}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E3F986EB-0268-4796-A9B6-3D1AA4EE9D55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E3F986EB-0268-4796-A9B6-3D1AA4EE9D55}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E3F986EB-0268-4796-A9B6-3D1AA4EE9D55}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E3F986EB-0268-4796-A9B6-3D1AA4EE9D55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

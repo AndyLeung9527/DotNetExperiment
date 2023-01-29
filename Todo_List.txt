@@ -1,4 +1,2 @@
 1.Upgrade to .Net7
 2.AspNetDistributedLocks compile
-3.DotNetSnowflakeId compile
-4.DotNetOpenTelemetry compile

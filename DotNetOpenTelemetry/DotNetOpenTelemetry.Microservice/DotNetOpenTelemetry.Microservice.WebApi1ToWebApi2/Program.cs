@@ -7,12 +7,16 @@ using OpenTelemetry.Context.Propagation;
 using OpenTelemetry.Trace;
 using System.Net.Http.Headers;
 using OpenTelemetry.Resources;
+using OpenTelemetry.Metrics;
+using System.Diagnostics.Metrics;
 
 internal class Program
 {
     const string nextServiceName = "WebApi2ToGrpcService3";
 
     static readonly ActivitySource ActivitySource = new(nameof(WebApi1ToWebApi2));
+    static readonly Meter CustomMeter = new(nameof(CustomMeter), "1.0");
+    static readonly Counter<long> CustomCounter = CustomMeter.CreateCounter<long>(nameof(CustomCounter));
     static readonly TextMapPropagator Propagator = Propagators.DefaultTextMapPropagator;
 
     static async Task Main(string[] args)
@@ -30,12 +34,18 @@ internal class Program
                 .AddAspNetCoreInstrumentation(options => options.Filter = httpContext => !httpContext.Request.Path.Equals("/"))
                 .AddSource(nameof(WebApi1ToWebApi2))
                 .AddConsoleExporter())
+            .WithMetrics(builder => builder
+                .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(nameof(WebApi1ToWebApi2)))
+                .AddMeter(nameof(CustomMeter))
+                .AddConsoleExporter())
             .StartWithHost();
 
         var app = builder.Build();
 
         app.MapGet("/Send/{content}", async ([FromRoute] string content, IHttpClientFactory httpClientFactory) =>
         {
+            CustomCounter.Add(1, new("method", "GET"), new("url", $"/Send/{content}"));
+
             var activityName = $"{nameof(WebApi1ToWebApi2)}_Send";
             using var activity = ActivitySource.StartActivity(activityName, ActivityKind.Client);
 
