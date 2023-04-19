@@ -75,6 +75,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetOpenTelemetry.Microse
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetOpenTelemetry.Microservice.Grpc3ToRabbitMQ4", "DotNetOpenTelemetry\DotNetOpenTelemetry.Microservice\DotNetOpenTelemetry.Microservice.Grpc3ToRabbitMQ4\DotNetOpenTelemetry.Microservice.Grpc3ToRabbitMQ4.csproj", "{7AC3AD64-0CB8-4D77-9A63-33AA83732B97}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetWebSocket", "DotNetWebSocket", "{27E7256B-2300-48C8-A73B-7AB612D2123F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetSignalR", "DotNetWebSocket\AspNetSignalR\AspNetSignalR.csproj", "{3F8013FF-74E7-48E3-B067-AA29787CF510}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -185,6 +189,10 @@ Global
 		{7AC3AD64-0CB8-4D77-9A63-33AA83732B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AC3AD64-0CB8-4D77-9A63-33AA83732B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AC3AD64-0CB8-4D77-9A63-33AA83732B97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F8013FF-74E7-48E3-B067-AA29787CF510}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F8013FF-74E7-48E3-B067-AA29787CF510}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F8013FF-74E7-48E3-B067-AA29787CF510}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F8013FF-74E7-48E3-B067-AA29787CF510}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -211,6 +219,7 @@ Global
 		{F8BA225E-63D8-4BEC-B5C0-20A7FE24AB81} = {CE19401D-A5A6-4FD9-A42F-1C20CDF77937}
 		{D4E626C3-758A-46C0-A743-A0874220DF23} = {CE19401D-A5A6-4FD9-A42F-1C20CDF77937}
 		{7AC3AD64-0CB8-4D77-9A63-33AA83732B97} = {CE19401D-A5A6-4FD9-A42F-1C20CDF77937}
+		{3F8013FF-74E7-48E3-B067-AA29787CF510} = {27E7256B-2300-48C8-A73B-7AB612D2123F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2A6B72B4-0A0E-4CB4-8C72-65FA2178875B}
