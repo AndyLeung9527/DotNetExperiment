@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "DotNetElasticsearch.BasicDemo": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:51617;http://localhost:51618"
+    }
+  }
+}
