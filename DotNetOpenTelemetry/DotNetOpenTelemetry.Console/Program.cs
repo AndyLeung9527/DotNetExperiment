@@ -14,25 +14,30 @@ partial class Program
     private static ActivitySource _source = new ActivitySource("DotNetOpenTelemetry", "1.0.0");
     static async Task Main(string[] args)
     {
-        //Console.WriteLine("************************Microsoft .NET documentation demo which using opentelemetry***********************");
-        //await Main1(args);
-        //Console.WriteLine("**********************************************************************************************************");
-        //Console.WriteLine();
-        //Console.WriteLine("************************Microsoft .NET documentation demo which using custom logic*************************");
-        //await Main2(args);
-        //Console.WriteLine("***********************************************************************************************************");
-        //Console.WriteLine();
-        //Console.WriteLine("**********************************Opentelemetry demo on github(Log part)**********************************");
-        //await Main3(args);
-        //Console.WriteLine("**********************************************************************************************************");
-        //Console.WriteLine();
-        //Console.WriteLine("**********************************Opentelemetry demo on github(Metrics part)**********************************");
-        //await Main4(args);
-        //Console.WriteLine("**************************************************************************************************************");
-        //Console.WriteLine();
-        Console.WriteLine("***********************************Opentelemetry demo on github(Traces part)***********************************");
+        Console.WriteLine("************************Microsoft .NET documentation demo which using opentelemetry***********************");
+        await Main1(args);
+        Console.WriteLine("**********************************************************************************************************");
+        Console.WriteLine();
+        Console.WriteLine("************************Microsoft .NET documentation demo which using custom logic*************************");
+        await Main2(args);
+        Console.WriteLine("***********************************************************************************************************");
+        Console.WriteLine("************************Microsoft .NET documentation demo which using custom metrics*************************");
+        await Main3(args);
+        Console.WriteLine("*************************************************************************************************************");
+        Console.WriteLine();
+        Console.WriteLine("**********************************Opentelemetry demo on github(Log part)**********************************");
+        await Main4(args);
+        Console.WriteLine("**********************************************************************************************************");
+        Console.WriteLine();
+        Console.WriteLine("**********************************Opentelemetry demo on github(Metrics part)**********************************");
         await Main5(args);
+        Console.WriteLine("**************************************************************************************************************");
+        Console.WriteLine();
+        Console.WriteLine("***********************************Opentelemetry demo on github(Traces part)***********************************");
+        await Main6(args);
         Console.WriteLine("***************************************************************************************************************");
+
+        Console.ReadLine();
     }
 
     static async Task DoSomeWork(string foo, int bar)
@@ -109,12 +114,50 @@ partial class Program
     }
 }
 /// <summary>
+/// Microsoft .NET documentation demo which using custom metrics
+/// </summary>
+partial class Program
+{
+    static Meter s_meter = new Meter("HatCo.HatStore", "1.0.0");
+    static Counter<int> s_hatsSold = s_meter.CreateCounter<int>("hats-sold");
+    static Histogram<int> s_orderProcessingTimeMs = s_meter.CreateHistogram<int>("order-processing-time");
+    static int s_coatsSold;
+    static int s_ordersPending;
+
+    static async Task Main3(string[] args)
+    {
+        s_meter.CreateObservableCounter("coats-sold", () => s_coatsSold);
+        s_meter.CreateObservableGauge("orders-pending", () => s_ordersPending);
+
+        var task = Task.Run(() =>
+        {
+            while (true)
+            {
+                // Pretend our store has one transaction each 100ms that each sell 4 hats
+                Thread.Sleep(100);
+                s_hatsSold.Add(4);
+
+                // Pretend we also sold 3 coats. For an ObservableCounter we track the value in our variable and report it
+                // on demand in the callback
+                s_coatsSold += 3;
+
+                // Pretend we have some queue of orders that varies over time. The callback for the "orders-pending" gauge will report
+                // this value on-demand.
+                s_ordersPending = Random.Shared.Next(0, 20);
+
+                // Last we pretend that we measured how long it took to do the transaction (for example we could time it with Stopwatch)
+                s_orderProcessingTimeMs.Record(Random.Shared.Next(5, 15));
+            }
+        });
+    }
+}
+/// <summary>
 /// Opentelemetry demo on github
 /// Log part
 /// </summary>
 partial class Program
 {
-    static async Task Main3(string[] args)
+    static async Task Main4(string[] args)
     {
         using var loggerFactory = LoggerFactory.Create(builder =>
         {
@@ -137,7 +180,7 @@ partial class Program
     private static readonly Meter MyMeter = new("MyCompany.MyProduct.MyLibrary", "1.0");
     private static readonly Counter<long> MyFruitCounter = MyMeter.CreateCounter<long>("MyFruitCounter");
 
-    static async Task Main4(string[] args)
+    static async Task Main5(string[] args)
     {
         using var meterProvider = Sdk.CreateMeterProviderBuilder()
             .AddMeter("MyCompany.MyProduct.MyLibrary")
@@ -159,7 +202,7 @@ partial class Program
 partial class Program
 {
     private static readonly ActivitySource MyActivitySource = new("MyCompany.MyProduct.MyLibrary");
-    static async Task Main5(string[] args)
+    static async Task Main6(string[] args)
     {
         using var tracerProvider = Sdk.CreateTracerProviderBuilder()
             .AddSource("MyCompany.MyProduct.MyLibrary")
