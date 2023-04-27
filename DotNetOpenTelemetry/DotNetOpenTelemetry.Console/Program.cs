@@ -12,30 +12,32 @@ using System.Diagnostics.Metrics;
 partial class Program
 {
     private static ActivitySource _source = new ActivitySource("DotNetOpenTelemetry", "1.0.0");
+
     static async Task Main(string[] args)
     {
         Console.WriteLine("************************Microsoft .NET documentation demo which using opentelemetry***********************");
         await Main1(args);
         Console.WriteLine("**********************************************************************************************************");
         Console.WriteLine();
-        Console.WriteLine("************************Microsoft .NET documentation demo which using custom logic*************************");
-        await Main2(args);
-        Console.WriteLine("***********************************************************************************************************");
-        Console.WriteLine("************************Microsoft .NET documentation demo which using custom metrics*************************");
-        await Main3(args);
-        Console.WriteLine("*************************************************************************************************************");
-        Console.WriteLine();
         Console.WriteLine("**********************************Opentelemetry demo on github(Log part)**********************************");
-        await Main4(args);
+        await Main2(args);
         Console.WriteLine("**********************************************************************************************************");
         Console.WriteLine();
         Console.WriteLine("**********************************Opentelemetry demo on github(Metrics part)**********************************");
-        await Main5(args);
+        await Main3(args);
         Console.WriteLine("**************************************************************************************************************");
         Console.WriteLine();
         Console.WriteLine("***********************************Opentelemetry demo on github(Traces part)***********************************");
-        await Main6(args);
+        await Main4(args);
         Console.WriteLine("***************************************************************************************************************");
+        Console.WriteLine();
+        Console.WriteLine("************************Microsoft .NET documentation demo which using custom activity listeners*************************");
+        await Main5(args);
+        Console.WriteLine("************************************************************************************************************************");
+        Console.WriteLine();
+        Console.WriteLine("************************Microsoft .NET documentation demo which using custom metrics listeners*************************");
+        await Main6(args);
+        Console.WriteLine("***********************************************************************************************************************");
 
         Console.ReadLine();
     }
@@ -91,11 +93,78 @@ partial class Program
     }
 }
 /// <summary>
-/// Microsoft .NET documentation demo which using custom logic
+/// Opentelemetry demo on github
+/// Log part
 /// </summary>
 partial class Program
 {
     static async Task Main2(string[] args)
+    {
+        using var loggerFactory = LoggerFactory.Create(builder =>
+        {
+            builder.AddOpenTelemetry(options =>
+            {
+                options.AddConsoleExporter();
+            });
+        });
+
+        var logger = loggerFactory.CreateLogger<Program>();
+        logger.LogInformation("Hello from {name} {price}.", "tomato", 2.99);
+    }
+}
+/// <summary>
+/// Opentelemetry demo on github
+/// Metrics part
+/// </summary>
+partial class Program
+{
+    private static readonly Meter MyMeter = new("MyCompany.MyProduct.MyLibrary", "1.0");
+    private static readonly Counter<long> MyFruitCounter = MyMeter.CreateCounter<long>("MyFruitCounter");
+
+    static async Task Main3(string[] args)
+    {
+        using var meterProvider = Sdk.CreateMeterProviderBuilder()
+            .AddMeter("MyCompany.MyProduct.MyLibrary")
+            .AddConsoleExporter()
+            .Build();
+
+        MyFruitCounter.Add(1, new("name", "apple"), new("color", "red"));
+        MyFruitCounter.Add(2, new("name", "lemon"), new("color", "yellow"));
+        MyFruitCounter.Add(1, new("name", "lemon"), new("color", "yellow"));
+        MyFruitCounter.Add(2, new("name", "apple"), new("color", "green"));
+        MyFruitCounter.Add(5, new("name", "apple"), new("color", "red"));
+        MyFruitCounter.Add(4, new("name", "lemon"), new("color", "yellow"));
+    }
+}
+/// <summary>
+/// Opentelemetry demo on github
+/// Traces part
+/// </summary>
+partial class Program
+{
+    private static readonly ActivitySource MyActivitySource = new("MyCompany.MyProduct.MyLibrary");
+    static async Task Main4(string[] args)
+    {
+        using var tracerProvider = Sdk.CreateTracerProviderBuilder()
+            .AddSource("MyCompany.MyProduct.MyLibrary")
+            .AddConsoleExporter()
+            .Build();
+
+        using (var activity = MyActivitySource.StartActivity("SayHello"))
+        {
+            activity?.SetTag("foo", 1);
+            activity?.SetTag("bar", "Hello, World!");
+            activity?.SetTag("baz", new int[] { 1, 2, 3 });
+            activity?.SetStatus(ActivityStatusCode.Ok);
+        }
+    }
+}
+/// <summary>
+/// Microsoft .NET documentation demo which using custom activity listeners
+/// </summary>
+partial class Program
+{
+    static async Task Main5(string[] args)
     {
         Activity.DefaultIdFormat = ActivityIdFormat.W3C;
         Activity.ForceDefaultIdFormat = true;
@@ -114,7 +183,7 @@ partial class Program
     }
 }
 /// <summary>
-/// Microsoft .NET documentation demo which using custom metrics
+/// Microsoft .NET documentation demo which using custom metrics listeners
 /// </summary>
 partial class Program
 {
@@ -123,8 +192,7 @@ partial class Program
     static Histogram<int> s_orderProcessingTimeMs = s_meter.CreateHistogram<int>("order-processing-time");
     static int s_coatsSold;
     static int s_ordersPending;
-
-    static async Task Main3(string[] args)
+    static async Task Main6(string[] args)
     {
         s_meter.CreateObservableCounter("coats-sold", () => s_coatsSold);
         s_meter.CreateObservableGauge("orders-pending", () => s_ordersPending);
@@ -149,72 +217,24 @@ partial class Program
                 s_orderProcessingTimeMs.Record(Random.Shared.Next(5, 15));
             }
         });
-    }
-}
-/// <summary>
-/// Opentelemetry demo on github
-/// Log part
-/// </summary>
-partial class Program
-{
-    static async Task Main4(string[] args)
-    {
-        using var loggerFactory = LoggerFactory.Create(builder =>
+
+        // Custom metrics listener
+        using (MeterListener meterlistener = new MeterListener())
         {
-            builder.AddOpenTelemetry(options =>
+            meterlistener.InstrumentPublished = (instrument, listener) =>
             {
-                options.AddConsoleExporter();
-            });
-        });
+                if (instrument.Meter.Name == "HatCo.HatStore")
+                {
+                    listener.EnableMeasurementEvents(instrument);
+                }
+            };
+            meterlistener.SetMeasurementEventCallback<int>(OnMeasurementRecorded);
+            meterlistener.Start();
 
-        var logger = loggerFactory.CreateLogger<Program>();
-        logger.LogInformation("Hello from {name} {price}.", "tomato", 2.99);
-    }
-}
-/// <summary>
-/// Opentelemetry demo on github
-/// Metrics part
-/// </summary>
-partial class Program
-{
-    private static readonly Meter MyMeter = new("MyCompany.MyProduct.MyLibrary", "1.0");
-    private static readonly Counter<long> MyFruitCounter = MyMeter.CreateCounter<long>("MyFruitCounter");
-
-    static async Task Main5(string[] args)
-    {
-        using var meterProvider = Sdk.CreateMeterProviderBuilder()
-            .AddMeter("MyCompany.MyProduct.MyLibrary")
-            .AddConsoleExporter()
-            .Build();
-
-        MyFruitCounter.Add(1, new("name", "apple"), new("color", "red"));
-        MyFruitCounter.Add(2, new("name", "lemon"), new("color", "yellow"));
-        MyFruitCounter.Add(1, new("name", "lemon"), new("color", "yellow"));
-        MyFruitCounter.Add(2, new("name", "apple"), new("color", "green"));
-        MyFruitCounter.Add(5, new("name", "apple"), new("color", "red"));
-        MyFruitCounter.Add(4, new("name", "lemon"), new("color", "yellow"));
-    }
-}
-/// <summary>
-/// Opentelemetry demo on github
-/// Traces part
-/// </summary>
-partial class Program
-{
-    private static readonly ActivitySource MyActivitySource = new("MyCompany.MyProduct.MyLibrary");
-    static async Task Main6(string[] args)
-    {
-        using var tracerProvider = Sdk.CreateTracerProviderBuilder()
-            .AddSource("MyCompany.MyProduct.MyLibrary")
-            .AddConsoleExporter()
-            .Build();
-
-        using (var activity = MyActivitySource.StartActivity("SayHello"))
-        {
-            activity?.SetTag("foo", 1);
-            activity?.SetTag("bar", "Hello, World!");
-            activity?.SetTag("baz", new int[] { 1, 2, 3 });
-            activity?.SetStatus(ActivityStatusCode.Ok);
+            static void OnMeasurementRecorded<T>(Instrument instrument, T measurement, ReadOnlySpan<KeyValuePair<string, object?>> tags, object? state)
+            {
+                Console.WriteLine($"{instrument.Name} recorded measurement {measurement}");
+            }
         }
     }
 }
