@@ -57,8 +57,7 @@ class Program
 
                     };
                 })
-                .AddConsoleExporter())
-            .StartWithHost();
+                .AddConsoleExporter());
 
         var app = builder.Build();
 
