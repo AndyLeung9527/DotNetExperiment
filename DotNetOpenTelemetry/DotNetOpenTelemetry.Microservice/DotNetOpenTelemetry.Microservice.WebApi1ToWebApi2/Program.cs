@@ -37,8 +37,7 @@ internal class Program
             .WithMetrics(builder => builder
                 .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(nameof(WebApi1ToWebApi2)))
                 .AddMeter(nameof(CustomMeter))
-                .AddConsoleExporter())
-            .StartWithHost();
+                .AddConsoleExporter());
 
         var app = builder.Build();
 

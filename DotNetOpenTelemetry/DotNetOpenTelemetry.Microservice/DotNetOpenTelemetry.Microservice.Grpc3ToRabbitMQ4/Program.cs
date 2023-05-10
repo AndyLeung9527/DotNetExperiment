@@ -23,8 +23,7 @@ internal class Program
                 .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(nameof(Grpc3ToRabbitMQ4)))
                 .AddAspNetCoreInstrumentation(options => options.Filter = httpContext => !httpContext.Request.Path.Equals("/"))
                 .AddSource(nameof(Grpc3ToRabbitMQ4))
-                .AddConsoleExporter())
-            .StartWithHost();
+                .AddConsoleExporter());
 
         var app = builder.Build();
 

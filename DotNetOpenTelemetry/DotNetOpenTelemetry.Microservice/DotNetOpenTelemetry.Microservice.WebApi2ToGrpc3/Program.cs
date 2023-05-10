@@ -28,8 +28,7 @@ internal class Program
                 .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(nameof(WebApi2ToGrpc3)))
                 .AddAspNetCoreInstrumentation(options => options.Filter = httpContext => !httpContext.Request.Path.Equals("/"))
                 .AddSource(nameof(WebApi2ToGrpc3))
-                .AddConsoleExporter())
-            .StartWithHost();
+                .AddConsoleExporter());
 
         var app = builder.Build();
 
@@ -50,7 +49,7 @@ internal class Program
             else if (Activity.Current != null)
                 contextToInject = Activity.Current.Context;
 
-            Metadata headers= new Metadata();
+            Metadata headers = new Metadata();
             Propagator.Inject(new PropagationContext(contextToInject, Baggage.Current), headers, (headers, key, value) =>
             {
                 headers.Add(key, value);
