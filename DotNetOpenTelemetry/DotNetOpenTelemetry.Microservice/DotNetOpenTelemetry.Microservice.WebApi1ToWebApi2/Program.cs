@@ -25,7 +25,7 @@ internal class Program
 
         builder.Services.AddHttpClient(nextServiceName, httpClient =>
         {
-            httpClient.BaseAddress = new Uri("http://localhost:5001");
+            httpClient.BaseAddress = new Uri("http://localhost:13910");
         });
 
         builder.Services.AddOpenTelemetry()

@@ -20,7 +20,7 @@ internal class Program
 
         builder.Services.AddGrpcClient<Casual.CasualClient>(options =>
         {
-            options.Address = new Uri("https://localhost:7148");
+            options.Address = new Uri("https://localhost:13921");
         });
 
         builder.Services.AddOpenTelemetry()
