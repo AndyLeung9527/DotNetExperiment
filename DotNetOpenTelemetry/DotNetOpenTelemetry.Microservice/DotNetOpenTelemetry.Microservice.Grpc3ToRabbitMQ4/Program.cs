@@ -23,7 +23,12 @@ internal class Program
                 .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(nameof(Grpc3ToRabbitMQ4)))
                 .AddAspNetCoreInstrumentation(options => options.Filter = httpContext => !httpContext.Request.Path.Equals("/"))
                 .AddSource(nameof(Grpc3ToRabbitMQ4))
-                .AddConsoleExporter());
+                .AddConsoleExporter()
+                .AddJaegerExporter(options =>
+                {
+                    options.AgentHost = "192.168.5.217";
+                    options.AgentPort = 6831;
+                }));
 
         var app = builder.Build();
 

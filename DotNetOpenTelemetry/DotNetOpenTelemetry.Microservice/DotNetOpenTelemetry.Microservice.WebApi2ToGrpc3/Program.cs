@@ -28,7 +28,12 @@ internal class Program
                 .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(nameof(WebApi2ToGrpc3)))
                 .AddAspNetCoreInstrumentation(options => options.Filter = httpContext => !httpContext.Request.Path.Equals("/"))
                 .AddSource(nameof(WebApi2ToGrpc3))
-                .AddConsoleExporter());
+                .AddConsoleExporter()
+                .AddJaegerExporter(options =>
+                {
+                    options.AgentHost = "192.168.5.217";
+                    options.AgentPort = 6831;
+                }));
 
         var app = builder.Build();
 

@@ -33,7 +33,12 @@ internal class Program
                 .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(nameof(WebApi1ToWebApi2)))
                 .AddAspNetCoreInstrumentation(options => options.Filter = httpContext => !httpContext.Request.Path.Equals("/"))
                 .AddSource(nameof(WebApi1ToWebApi2))
-                .AddConsoleExporter())
+                .AddConsoleExporter()
+                .AddJaegerExporter(options =>
+                {
+                    options.AgentHost = "192.168.5.217";
+                    options.AgentPort = 6831;
+                }))
             .WithMetrics(builder => builder
                 .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(nameof(WebApi1ToWebApi2)))
                 .AddMeter(nameof(CustomMeter))
