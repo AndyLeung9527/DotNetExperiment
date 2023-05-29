@@ -36,15 +36,18 @@ internal class Program
                 .AddConsoleExporter()
                 .AddJaegerExporter(options =>
                 {
-                    options.AgentHost = "192.168.5.217";
+                    options.AgentHost = "192.168.1.46";
                     options.AgentPort = 6831;
                 }))
             .WithMetrics(builder => builder
                 .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(nameof(WebApi1ToWebApi2)))
                 .AddMeter(nameof(CustomMeter))
-                .AddConsoleExporter());
+                .AddConsoleExporter()
+                .AddPrometheusExporter());
 
         var app = builder.Build();
+
+        app.UseOpenTelemetryPrometheusScrapingEndpoint();
 
         app.MapGet("/Send/{content}", async ([FromRoute] string content, IHttpClientFactory httpClientFactory) =>
         {
@@ -66,6 +69,7 @@ internal class Program
                 headers.Add(key, value);
             });
 
+            content = $"{content}->{nameof(WebApi1ToWebApi2)}";
             var response = await httpClient.GetAsync($"/Receive/{content}");
             var result = await response.Content.ReadAsStringAsync();
             return Results.Ok(result);

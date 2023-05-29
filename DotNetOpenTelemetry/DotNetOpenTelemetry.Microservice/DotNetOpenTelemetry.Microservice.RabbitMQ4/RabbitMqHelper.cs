@@ -14,7 +14,7 @@ public static class RabbitMqHelper
     {
         _connectionFactory = new ConnectionFactory
         {
-            HostName = "192.168.5.217",
+            HostName = "192.168.1.46",
             UserName = "guest",
             Password = "guest",
             Port = 5672,
