@@ -11,6 +11,10 @@ using System.Diagnostics.Metrics;
 
 partial class Program
 {
+    /*
+    s_activeSources.Add(this);
+    s_allListeners.shouldListenTo(activitySource)?activitySource.AddListener(listener)
+     */
     private static ActivitySource _source = new ActivitySource("DotNetOpenTelemetry", "1.0.0");
 
     static async Task Main(string[] args)
@@ -44,6 +48,21 @@ partial class Program
 
     static async Task DoSomeWork(string foo, int bar)
     {
+        /*
+        _listeners.Count == 0?null
+        samplingResult = _listeners.Sample
+        Activity.Create()
+          -- new Activity(name)
+          -- activity._parentId= parentId;
+          -- activity.IsAllDataRequested = samplingResult
+          -- Start()
+            -- _previousActiveActivity = Current
+            -- Parent = _previousActiveActivity
+            -- StartTimeUtc = GetUtcNow()
+            -- GenerateW3CId()
+            -- SetCurrent(this)
+            -- _listeners.ActivityStarted
+         */
         using (Activity? activity = _source.StartActivity("SomeWork"))
         {
             activity?.SetTag("foo", foo);
@@ -56,6 +75,11 @@ partial class Program
             // Pretend something went wrong
             activity?.SetTag("otel.status_code", "ERROR");
             activity?.SetTag("otel.status_description", "Use this text give more information abount the error");
+            /*
+            SetEndTime(GetUtcNow())
+            _listeners.ActivityStopped
+            SetCurrent(_previousActiveActivity)
+             */
         }
     }
 
@@ -170,6 +194,10 @@ partial class Program
         Activity.ForceDefaultIdFormat = true;
 
         Console.WriteLine("         {0,-15}{1,-60}{2,-15}", "OperationName", "Id", "Duration");
+        /*
+        s_allListeners.Add(listener)
+        ActivityListener.ShouldListenTo(s_activeSources)?s_activeSources.AddListener(this)
+         */
         ActivitySource.AddActivityListener(new ActivityListener()
         {
             ShouldListenTo = (source) => true,
@@ -187,7 +215,17 @@ partial class Program
 /// </summary>
 partial class Program
 {
+    /*
+    s_allMeters.Add(this);
+     */
     static Meter s_meter = new Meter("HatCo.HatStore", "1.0.0");
+    /*
+    new Counter<T>
+    Meter = meter,Name = name
+    Publish();
+      -- Meter.AddInstrument(this);
+      -- s_allStartedListeners<MeterListener>.InstrumentPublished?.Invoke(this, listener);
+     */
     static Counter<int> s_hatsSold = s_meter.CreateCounter<int>("hats-sold");
     static Histogram<int> s_orderProcessingTimeMs = s_meter.CreateHistogram<int>("order-processing-time");
     static int s_coatsSold;
@@ -203,6 +241,10 @@ partial class Program
             {
                 // Pretend our store has one transaction each 100ms that each sell 4 hats
                 Thread.Sleep(100);
+                /*
+                _subscriptions<DiagLinkedList<ListenerSubscription>>.MeterListener.NotifyMeasurement(this, measurement);
+                  -- meterListener.MeasurementCallback(instrument, (decimal)(object)measurement
+                 */
                 s_hatsSold.Add(4);
 
                 // Pretend we also sold 3 coats. For an ObservableCounter we track the value in our variable and report it
@@ -225,10 +267,20 @@ partial class Program
             {
                 if (instrument.Meter.Name == "HatCo.HatStore")
                 {
+                    /*
+                    DiagLinkedList<Instrument> _enabledMeasurementInstruments.Add(instrument);
+                    instrument.EnableMeasurement(new ListenerSubscription(this, state), out oldStateStored);
+                      -- _subscriptions<DiagLinkedList<ListenerSubscription>>.Add(MeterListener)
+                    MeasurementsCompleted?.Invoke(instrument!, oldState);
+                     */
                     listener.EnableMeasurementEvents(instrument);
                 }
             };
             meterlistener.SetMeasurementEventCallback<int>(OnMeasurementRecorded);
+            /*
+            s_allStartedListeners<MeterListener>.Add(this);
+            InstrumentPublished?.Invoke(s_allMeters._instruments,this);
+             */
             meterlistener.Start();
 
             static void OnMeasurementRecorded<T>(Instrument instrument, T measurement, ReadOnlySpan<KeyValuePair<string, object?>> tags, object? state)
