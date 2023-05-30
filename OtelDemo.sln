@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetOpenTelemetry", "DotNetOpenTelemetry", "{3B0F39B7-8D17-448C-A778-2FBDB896AA5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetOpenTelemetry.Console", "DotNetOpenTelemetry\DotNetOpenTelemetry.Console\DotNetOpenTelemetry.Console.csproj", "{8775103A-C338-490B-A3A6-6FA57775DF61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetOpenTelemetry.Web", "DotNetOpenTelemetry\DotNetOpenTelemetry.Web\DotNetOpenTelemetry.Web.csproj", "{5831BD6D-C5AA-4BBF-A9D5-B13D0EDBCFB7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetOpenTelemetry.Microservice", "DotNetOpenTelemetry.Microservice", "{42B81B3A-1E3F-4C05-8779-1C9B15EAD835}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetOpenTelemetry.Microservice.WebApi1ToWebApi2", "DotNetOpenTelemetry\DotNetOpenTelemetry.Microservice\DotNetOpenTelemetry.Microservice.WebApi1ToWebApi2\DotNetOpenTelemetry.Microservice.WebApi1ToWebApi2.csproj", "{5FBF33A5-53D8-484F-9167-3598F5C88A1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetOpenTelemetry.Microservice.WebApi2ToGrpc3", "DotNetOpenTelemetry\DotNetOpenTelemetry.Microservice\DotNetOpenTelemetry.Microservice.WebApi2ToGrpc3\DotNetOpenTelemetry.Microservice.WebApi2ToGrpc3.csproj", "{8A77ECF1-7A2C-4B7A-8332-7D06FAC5B5DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetOpenTelemetry.Microservice.Grpc3ToRabbitMQ4", "DotNetOpenTelemetry\DotNetOpenTelemetry.Microservice\DotNetOpenTelemetry.Microservice.Grpc3ToRabbitMQ4\DotNetOpenTelemetry.Microservice.Grpc3ToRabbitMQ4.csproj", "{8DEEE8B5-4686-4F96-924A-0D66FF430892}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetOpenTelemetry.Microservice.RabbitMQ4", "DotNetOpenTelemetry\DotNetOpenTelemetry.Microservice\DotNetOpenTelemetry.Microservice.RabbitMQ4\DotNetOpenTelemetry.Microservice.RabbitMQ4.csproj", "{DF73AE16-9DD3-4E3D-8FE4-305BB2FC8485}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8775103A-C338-490B-A3A6-6FA57775DF61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8775103A-C338-490B-A3A6-6FA57775DF61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8775103A-C338-490B-A3A6-6FA57775DF61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8775103A-C338-490B-A3A6-6FA57775DF61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5831BD6D-C5AA-4BBF-A9D5-B13D0EDBCFB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5831BD6D-C5AA-4BBF-A9D5-B13D0EDBCFB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5831BD6D-C5AA-4BBF-A9D5-B13D0EDBCFB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5831BD6D-C5AA-4BBF-A9D5-B13D0EDBCFB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FBF33A5-53D8-484F-9167-3598F5C88A1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FBF33A5-53D8-484F-9167-3598F5C88A1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FBF33A5-53D8-484F-9167-3598F5C88A1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FBF33A5-53D8-484F-9167-3598F5C88A1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A77ECF1-7A2C-4B7A-8332-7D06FAC5B5DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A77ECF1-7A2C-4B7A-8332-7D06FAC5B5DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A77ECF1-7A2C-4B7A-8332-7D06FAC5B5DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A77ECF1-7A2C-4B7A-8332-7D06FAC5B5DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DEEE8B5-4686-4F96-924A-0D66FF430892}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DEEE8B5-4686-4F96-924A-0D66FF430892}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DEEE8B5-4686-4F96-924A-0D66FF430892}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DEEE8B5-4686-4F96-924A-0D66FF430892}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF73AE16-9DD3-4E3D-8FE4-305BB2FC8485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF73AE16-9DD3-4E3D-8FE4-305BB2FC8485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF73AE16-9DD3-4E3D-8FE4-305BB2FC8485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF73AE16-9DD3-4E3D-8FE4-305BB2FC8485}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8775103A-C338-490B-A3A6-6FA57775DF61} = {3B0F39B7-8D17-448C-A778-2FBDB896AA5A}
+		{5831BD6D-C5AA-4BBF-A9D5-B13D0EDBCFB7} = {3B0F39B7-8D17-448C-A778-2FBDB896AA5A}
+		{42B81B3A-1E3F-4C05-8779-1C9B15EAD835} = {3B0F39B7-8D17-448C-A778-2FBDB896AA5A}
+		{5FBF33A5-53D8-484F-9167-3598F5C88A1E} = {42B81B3A-1E3F-4C05-8779-1C9B15EAD835}
+		{8A77ECF1-7A2C-4B7A-8332-7D06FAC5B5DA} = {42B81B3A-1E3F-4C05-8779-1C9B15EAD835}
+		{8DEEE8B5-4686-4F96-924A-0D66FF430892} = {42B81B3A-1E3F-4C05-8779-1C9B15EAD835}
+		{DF73AE16-9DD3-4E3D-8FE4-305BB2FC8485} = {42B81B3A-1E3F-4C05-8779-1C9B15EAD835}
+	EndGlobalSection
+EndGlobal
