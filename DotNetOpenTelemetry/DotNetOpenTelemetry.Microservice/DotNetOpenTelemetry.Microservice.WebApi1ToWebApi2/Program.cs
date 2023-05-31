@@ -36,7 +36,7 @@ internal class Program
                 .AddConsoleExporter()
                 .AddJaegerExporter(options =>
                 {
-                    options.AgentHost = "192.168.1.46";
+                    options.AgentHost = "192.168.5.217";
                     options.AgentPort = 6831;
                 }))
             .WithMetrics(builder => builder
