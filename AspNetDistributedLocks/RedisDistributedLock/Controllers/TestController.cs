@@ -34,7 +34,8 @@ public class TestController : ControllerBase
         while (!await _redisConn.GetDatabase(0).StringSetAsync(_lockKey, guid.ToString(), _tsExpired, When.NotExists))
             await Task.Delay(300);
 
-        _redisConn.GetDatabase(0).ScriptEvaluateAsync()
+        string script = string.Empty;
+        await _redisConn.GetDatabase(0).ScriptEvaluateAsync(script);
         stockNum = (long)await _redisConn.GetDatabase(0).StringGetAsync(_stockKey);
         if (stockNum > 0)
         {
