@@ -17,6 +17,7 @@ class Program
             .ConfigureHostConfiguration(builder => builder.AddCommandLine(args))
             .ConfigureAppConfiguration((context, builder) =>
             {
+                //builder.Add(new Microsoft.Extensions.Configuration.Json.JsonConfigurationSource { Path = "appsettings.json" });等同AddJsonFile
                 builder.AddJsonFile("appsettings.json", false);
                 builder.AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", true);
             })
