@@ -29,6 +29,8 @@ class Program
                 services.AddHostedService<AirEnvironmentService>();
                 services.AddOptions();
                 services.Configure<AirEnvironmentOptions>(context.Configuration.GetSection("AirEnvironment"));
+
+                services.AddHostedService<LifeTimeDemoService>();
             })
             .ConfigureLogging(builder => builder.AddConsole())
             .Build();
@@ -122,4 +124,39 @@ public class Collector : ITemperatureCollector, IHumidityCollector, IAirQualityC
     int ITemperatureCollector.Get() => Random.Shared.Next(0, 1000);
     int IHumidityCollector.Get() => Random.Shared.Next(0, 1000);
     int IAirQualityCollector.Get() => Random.Shared.Next(0, 1000);
+}
+
+public class LifeTimeDemoService : IHostedService
+{
+    private readonly IHostApplicationLifetime _lifetime;
+    private IDisposable? _tokenSource;
+
+    public LifeTimeDemoService(IHostApplicationLifetime lifetime)
+    {
+        _lifetime = lifetime;
+        _lifetime.ApplicationStarted.Register(() =>
+        {
+            Console.WriteLine($"{DateTimeOffset.Now} Application Started");
+        });
+        _lifetime.ApplicationStopping.Register(() =>
+        {
+            Console.WriteLine($"{DateTimeOffset.Now} Application Stopping");
+        });
+        _lifetime.ApplicationStopped.Register(() =>
+        {
+            Console.WriteLine($"{DateTimeOffset.Now} Application Stopped");
+        });
+    }
+
+    public Task StartAsync(CancellationToken cancellationToken)
+    {
+        _tokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(3)).Token.Register(_lifetime.StopApplication);
+        return Task.CompletedTask;
+    }
+
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        _tokenSource?.Dispose();
+        return Task.CompletedTask;
+    }
 }
