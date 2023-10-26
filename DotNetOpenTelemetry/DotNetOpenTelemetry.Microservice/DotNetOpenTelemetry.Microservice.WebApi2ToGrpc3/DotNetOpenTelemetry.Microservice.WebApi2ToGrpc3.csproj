@@ -11,17 +11,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.21.11" />
-    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.50.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.51.0">
+    <PackageReference Include="Google.Protobuf" Version="3.24.3" />
+    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.57.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.58.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="OpenTelemetry" Version="1.4.0" />
-    <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.4.0" />
-    <PackageReference Include="OpenTelemetry.Exporter.Jaeger" Version="1.4.0" />
+    <PackageReference Include="OpenTelemetry" Version="1.6.0" />
+    <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.6.0" />
+    <PackageReference Include="OpenTelemetry.Exporter.Jaeger" Version="1.5.1" />
     <PackageReference Include="OpenTelemetry.Exporter.Prometheus.AspNetCore" Version="1.4.0-rc.4" />
-    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.4.0" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.6.0" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9.14" />
   </ItemGroup>
 
