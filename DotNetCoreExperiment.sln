@@ -79,11 +79,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetSignalR", "DotNetWebS
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetHook", "DotNetHook", "{86D9EC56-B3B0-44AD-B1D4-1821F51D547C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetHarmony", "DotNetHook\DotNetHarmony\DotNetHarmony.csproj", "{818D3EB7-9AFB-423C-AA9A-BB2F59F104ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetHarmony", "DotNetHook\DotNetHarmony\DotNetHarmony.csproj", "{818D3EB7-9AFB-423C-AA9A-BB2F59F104ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetClass", "DotNetHook\DotNetClass\DotNetClass.csproj", "{03B8623F-BF1F-42F0-9A14-83901E52F1E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetClass", "DotNetHook\DotNetClass\DotNetClass.csproj", "{03B8623F-BF1F-42F0-9A14-83901E52F1E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetHosting", "DotNetHosting\DotNetHosting.csproj", "{5544F397-0541-41B0-B295-8FB4BB75BC40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetHosting", "DotNetHosting\DotNetHosting.csproj", "{5544F397-0541-41B0-B295-8FB4BB75BC40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetDynamicExpresso", "DotNetDynamicExpresso\DotNetDynamicExpresso.csproj", "{071DD7EB-42A8-4834-99A3-6EDA19EF4ACC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -207,6 +209,10 @@ Global
 		{5544F397-0541-41B0-B295-8FB4BB75BC40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5544F397-0541-41B0-B295-8FB4BB75BC40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5544F397-0541-41B0-B295-8FB4BB75BC40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{071DD7EB-42A8-4834-99A3-6EDA19EF4ACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{071DD7EB-42A8-4834-99A3-6EDA19EF4ACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{071DD7EB-42A8-4834-99A3-6EDA19EF4ACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{071DD7EB-42A8-4834-99A3-6EDA19EF4ACC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
