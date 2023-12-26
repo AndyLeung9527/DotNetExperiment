@@ -85,7 +85,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetClass", "DotNetHook\D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetHosting", "DotNetHosting\DotNetHosting.csproj", "{5544F397-0541-41B0-B295-8FB4BB75BC40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetDynamicExpresso", "DotNetDynamicExpresso\DotNetDynamicExpresso.csproj", "{071DD7EB-42A8-4834-99A3-6EDA19EF4ACC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDynamicExpresso", "DotNetDynamicExpresso\DotNetDynamicExpresso.csproj", "{071DD7EB-42A8-4834-99A3-6EDA19EF4ACC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetChannel", "DotNetChannel\DotNetChannel.csproj", "{CB921D41-7605-4A55-BC69-03DE0C1C188D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -213,6 +215,10 @@ Global
 		{071DD7EB-42A8-4834-99A3-6EDA19EF4ACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{071DD7EB-42A8-4834-99A3-6EDA19EF4ACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{071DD7EB-42A8-4834-99A3-6EDA19EF4ACC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB921D41-7605-4A55-BC69-03DE0C1C188D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB921D41-7605-4A55-BC69-03DE0C1C188D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB921D41-7605-4A55-BC69-03DE0C1C188D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB921D41-7605-4A55-BC69-03DE0C1C188D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
