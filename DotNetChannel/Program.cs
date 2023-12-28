@@ -41,7 +41,7 @@ namespace DotNetChannel
                 });
             }
 
-            //写入
+            //写入\读取
             {
                 var channel = Channel.CreateUnbounded<string>();
                 await channel.Writer.WriteAsync("demo");
@@ -51,11 +51,7 @@ namespace DotNetChannel
                 //    var isSucceed = channel.Writer.TryWrite("demo");
                 //}
                 channel.Writer.Complete();//Complete表示不再向通道写入数据
-            }
 
-            //读取
-            {
-                var channel = Channel.CreateUnbounded<string>();
                 //一次读取一个
                 while (await channel.Reader.WaitToReadAsync())
                 {
@@ -68,6 +64,79 @@ namespace DotNetChannel
                 while (await channel.Reader.WaitToReadAsync())
                 {
                     await foreach (var item in channel.Reader.ReadAllAsync())
+                    {
+                        Console.WriteLine(item);
+                    }
+                }
+            }
+
+            //流式应用(分治)
+            {
+                //获取文件
+                Task<Channel<string>> GetFilesAsync()
+                {
+                    var filePathChannel = Channel.CreateUnbounded<string>();
+                    filePathChannel.Writer.TryWrite("file1.txt");
+                    filePathChannel.Writer.TryWrite("file2.txt");
+                    filePathChannel.Writer.Complete();
+                    return Task.FromResult(filePathChannel);
+                }
+
+                //处理文件输出结果
+                async Task<Channel<string>[]> Analyse(Channel<string> filePathChannel)
+                {
+                    var counterChannel = Channel.CreateUnbounded<string>();
+                    var errorsChannel = Channel.CreateUnbounded<string>();
+                    while (await filePathChannel.Reader.WaitToReadAsync())
+                    {
+                        await foreach (var filePath in filePathChannel.Reader.ReadAllAsync())
+                        {
+                            counterChannel.Writer.TryWrite($"File [{filePath}] Analysis begins.");
+                            errorsChannel.Writer.TryWrite($"File [{filePath}] Analysis errors");
+                        }
+                    }
+                    counterChannel.Writer.Complete();
+                    errorsChannel.Writer.Complete();
+                    return new Channel<string>[] { counterChannel, errorsChannel };
+                }
+
+                //汇总信息
+                async Task<Channel<string>> Merge(params Channel<string>[] channels)
+                {
+                    var mergeTasks = new List<Task>();
+                    var outputChannel = Channel.CreateUnbounded<string>();
+                    foreach (var channel in channels)
+                    {
+                        var thisChannel = channel;
+                        var mergeTask = Task.Run(async () =>
+                        {
+                            while (await thisChannel.Reader.WaitToReadAsync())
+                            {
+                                await foreach (var item in thisChannel.Reader.ReadAllAsync())
+                                {
+                                    outputChannel.Writer.TryWrite(item);
+                                }
+                            }
+                        });
+                        mergeTasks.Add(mergeTask);
+                    }
+                    await Task.WhenAll(mergeTasks);
+                    outputChannel.Writer.Complete();
+                    return outputChannel;
+                }
+
+                //执行
+                //       ------(channel)-------> Step2-1 ------(channel)------->
+                //      /                                                        \
+                //Step1                                                            Step3
+                //      \                                                        /
+                //       ------(channel)-------> Step2-2 ------(channel)------->
+                var fileChannelPath = await GetFilesAsync();
+                var analyseChannels = await Analyse(fileChannelPath);
+                var mergedChannel = await Merge(analyseChannels);
+                while (await mergedChannel.Reader.WaitToReadAsync())
+                {
+                    await foreach (var item in mergedChannel.Reader.ReadAllAsync())
                     {
                         Console.WriteLine(item);
                     }
