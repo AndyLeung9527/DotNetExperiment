@@ -1,7 +1,5 @@
 ﻿namespace DotNetGrpc.Client;
 
-using DotNetGrpc.Server;
-
 /// <summary>
 /// gRpc请求测试(IOC)
 /// </summary>

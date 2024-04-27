@@ -1,6 +1,5 @@
 ﻿namespace DotNetGrpc.Client;
 
-using DotNetGrpc.Server;
 using Grpc.Net.Client;
 
 /// <summary>
@@ -10,7 +9,7 @@ public class GrpcRequestTest
 {
     public void CreateOrder()
     {
-        string url = "https://localhost:7242";
+        string url = "https://localhost:5001";
         using (var channel = GrpcChannel.ForAddress(url))
         {
             var client = new Order.OrderClient(channel);

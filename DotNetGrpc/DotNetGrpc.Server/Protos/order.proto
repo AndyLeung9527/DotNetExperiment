@@ -1,5 +1,7 @@
-﻿syntax = "proto3";
+﻿// `syntax`指示使用的protocol buffers的版本
+syntax = "proto3";
 
+// `csharp_namespace`指示生成的存根文件所在的`命名空间`,
 option csharp_namespace = "DotNetGrpc.Server";
 
 package order;

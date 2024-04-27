@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "DotNetGrpc.Server";
+
+package downloadfile;
+
+service DownloadFile{
+	rpc ReadFile (ReadFileRequest) returns (stream ReadFileReply);
+}
+
+message ReadFileRequest{
+	string fileFullName = 1;
+}
+
+message ReadFileReply{
+	google.protobuf.BytesValue content = 1;
+	google.protobuf.Int64Value totalSize = 2;
+}

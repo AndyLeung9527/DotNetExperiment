@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option csharp_namespace = "DotNetGrpc.Server";
+
+package bidirectionalstreaming;
+
+// 双向流式通讯服务定义
+service BidirectionalStreaming{
+	rpc PingPongHello(stream Serve) returns (stream Catch);
+}
+
+message Serve{
+	int32 id = 1;
+	int32 content = 2;
+}
+
+message Catch{
+	int32 id = 1;
+	int32 content = 2;
+}
