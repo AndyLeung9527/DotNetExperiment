@@ -50,7 +50,7 @@ public class AirEnvironmentPublisher
                                     "空气质量：{airQuality, -10}" +
                                     "时间：{now}";
     private readonly ILogger _logger;
-    private readonly Action<ILogger, int, int, int, string, Exception> _logAction;
+    private readonly Action<ILogger, int, int, int, string, Exception?> _logAction;
 
     public AirEnvironmentPublisher(ILogger<AirEnvironmentPublisher> logger)
     {
