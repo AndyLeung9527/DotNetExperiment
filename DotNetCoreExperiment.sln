@@ -87,7 +87,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetHosting", "DotNetHost
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDynamicExpresso", "DotNetDynamicExpresso\DotNetDynamicExpresso.csproj", "{071DD7EB-42A8-4834-99A3-6EDA19EF4ACC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetChannel", "DotNetChannel\DotNetChannel.csproj", "{CB921D41-7605-4A55-BC69-03DE0C1C188D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetChannel", "DotNetChannel\DotNetChannel.csproj", "{CB921D41-7605-4A55-BC69-03DE0C1C188D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetAes", "DotNetAes\DotNetAes.csproj", "{5B8B6621-0432-4316-AD27-F4EFD4F7D393}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -219,6 +221,10 @@ Global
 		{CB921D41-7605-4A55-BC69-03DE0C1C188D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB921D41-7605-4A55-BC69-03DE0C1C188D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB921D41-7605-4A55-BC69-03DE0C1C188D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B8B6621-0432-4316-AD27-F4EFD4F7D393}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B8B6621-0432-4316-AD27-F4EFD4F7D393}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B8B6621-0432-4316-AD27-F4EFD4F7D393}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B8B6621-0432-4316-AD27-F4EFD4F7D393}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
