@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,6 +33,7 @@ class Program
                 services.Configure<AirEnvironmentOptions>(context.Configuration.GetSection("AirEnvironment"));
 
                 services.AddHostedService<LifeTimeDemoService>();
+                services.AddHostedService<TimedHostedDemoService>();
             })
             .ConfigureLogging(builder => builder.AddConsole())
             .Build();
@@ -159,5 +161,62 @@ public class LifeTimeDemoService : IHostedService
     {
         _tokenSource?.Dispose();
         return Task.CompletedTask;
+    }
+}
+
+public class TimedHostedDemoService : IHostedService
+{
+    private PeriodicTimer? _timer;
+    private CancellationTokenSource? _cts;
+    private Task? _timerTask;
+
+    private readonly int _interval;
+
+    public TimedHostedDemoService()
+    {
+        _interval = 1;
+    }
+
+    public Task StartAsync(CancellationToken cancellationToken)
+    {
+        _cts = new CancellationTokenSource();
+        _timer = new PeriodicTimer(TimeSpan.FromSeconds(_interval));
+        _timerTask = ExecAsync();
+
+        return Task.CompletedTask;
+    }
+
+    public async Task StopAsync(CancellationToken cancellationToken)
+    {
+        if (_timerTask is not null)
+        {
+            _cts?.Cancel();
+            await _timerTask;
+            _timer?.Dispose();
+            _cts?.Dispose();
+            _timerTask = null;
+        }
+    }
+
+    private async Task ExecAsync()
+    {
+        try
+        {
+            while (_timer != null && _cts != null && await _timer.WaitForNextTickAsync(_cts.Token))
+            {
+                try
+                {
+                    Console.WriteLine($"后台定时任务执行成功{DateTime.Now:HH:mm:ss}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"后台定时任务执行异常");
+                }
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            Console.WriteLine($"后台定时任务停止");
+        }
     }
 }
