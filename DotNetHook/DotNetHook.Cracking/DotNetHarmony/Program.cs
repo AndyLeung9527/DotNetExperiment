@@ -7,24 +7,24 @@ using System.Reflection;
 
 internal class Program
 {
+    /// <summary>
+    /// I破解，改变第三方dll行为
+    /// </summary>
+    /// <param name="args"></param>
     static void Main(string[] args)
-    {
-        InitHook();
-        string info = new Person().GetInfo(1);
-        Console.WriteLine($"{System.Environment.NewLine}---Main Part---{System.Environment.NewLine}{info}");
-        Console.ReadLine();
-    }
-
-    static void InitHook()
     {
         Harmony.DEBUG = true;//开启Harmony调试日志
         var harmony = new Harmony("com.example.patch");
         harmony.PatchAll(Assembly.GetExecutingAssembly());//自动补丁
+
+        string info = new Person().GetInfo(1);
+        Console.WriteLine($"{System.Environment.NewLine}---Main Part---{System.Environment.NewLine}{info}");
+        Console.ReadLine();
     }
 }
 
 [HarmonyPatch(typeof(Person), nameof(Person.GetInfo))]
-class Patch
+class CrackingPatch
 {
     /// <summary>
     /// 前置方法, 在原始方法调用前执行
