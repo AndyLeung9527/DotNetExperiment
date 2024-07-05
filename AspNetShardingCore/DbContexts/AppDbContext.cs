@@ -1,10 +1,10 @@
-﻿using AspNetShardingCore.Models;
+﻿namespace AspNetShardingCore.DbContexts;
+
+using AspNetShardingCore.Models;
 using Microsoft.EntityFrameworkCore;
 using ShardingCore.Core.VirtualRoutes.TableRoutes.RouteTails.Abstractions;
 using ShardingCore.Sharding;
 using ShardingCore.Sharding.Abstractions;
-
-namespace AspNetShardingCore.DbContexts;
 
 public class AppDbContext : AbstractShardingDbContext, IShardingTableDbContext
 {

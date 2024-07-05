@@ -95,6 +95,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetAccessMySql.CodeFirst
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetAccessMySql.CodeFirst", "DotNetAccessMySql\DotNetAccessMySql.CodeFirst\DotNetAccessMySql.CodeFirst.csproj", "{4253E1B4-AFE0-40A4-B64F-02E2DE535A8F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetEasyCaching", "AspNetEasyCaching\AspNetEasyCaching.csproj", "{927AC1C6-F3C4-4919-9732-7A7FB3E11B8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -229,6 +231,10 @@ Global
 		{4253E1B4-AFE0-40A4-B64F-02E2DE535A8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4253E1B4-AFE0-40A4-B64F-02E2DE535A8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4253E1B4-AFE0-40A4-B64F-02E2DE535A8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{927AC1C6-F3C4-4919-9732-7A7FB3E11B8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{927AC1C6-F3C4-4919-9732-7A7FB3E11B8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{927AC1C6-F3C4-4919-9732-7A7FB3E11B8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{927AC1C6-F3C4-4919-9732-7A7FB3E11B8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
