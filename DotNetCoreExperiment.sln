@@ -99,6 +99,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetApp", "DotNetHook\Dot
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetHarmony", "DotNetHook\DotNetHook.Injecting\DotNetHarmony\DotNetHarmony.csproj", "{4260ED9B-80B8-49B4-B2E2-4660D2826E00}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetShardingCore", "AspNetShardingCore\AspNetShardingCore.csproj", "{E1B085B6-ED58-4807-88E4-EA98B28639C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetAccessMySql.CodeFirst", "DotNetAccessMySql\AspNetAccessMySql.CodeFirst\AspNetAccessMySql.CodeFirst.csproj", "{6A173D01-93FA-44DC-9F5E-F5FFC70C6545}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -241,6 +245,14 @@ Global
 		{4260ED9B-80B8-49B4-B2E2-4660D2826E00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4260ED9B-80B8-49B4-B2E2-4660D2826E00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4260ED9B-80B8-49B4-B2E2-4660D2826E00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1B085B6-ED58-4807-88E4-EA98B28639C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1B085B6-ED58-4807-88E4-EA98B28639C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1B085B6-ED58-4807-88E4-EA98B28639C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1B085B6-ED58-4807-88E4-EA98B28639C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A173D01-93FA-44DC-9F5E-F5FFC70C6545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A173D01-93FA-44DC-9F5E-F5FFC70C6545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A173D01-93FA-44DC-9F5E-F5FFC70C6545}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A173D01-93FA-44DC-9F5E-F5FFC70C6545}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -274,6 +286,7 @@ Global
 		{837CDF86-66DD-4FBA-B97A-DD02D9FA8BA9} = {86D9EC56-B3B0-44AD-B1D4-1821F51D547C}
 		{ADB7FF88-A06D-4CF9-979C-42C6553129B1} = {837CDF86-66DD-4FBA-B97A-DD02D9FA8BA9}
 		{4260ED9B-80B8-49B4-B2E2-4660D2826E00} = {837CDF86-66DD-4FBA-B97A-DD02D9FA8BA9}
+		{6A173D01-93FA-44DC-9F5E-F5FFC70C6545} = {99BF732A-A8DA-4CE0-A3D3-2E72F95E4179}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2A6B72B4-0A0E-4CB4-8C72-65FA2178875B}
