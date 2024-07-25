@@ -99,9 +99,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetEasyCaching", "AspNet
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AspNetProxy", "AspNetProxy", "{71E069BC-BEF8-40D0-9819-57906DB4DBB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetProxy", "AspNetProxy\AspNetProxy\AspNetProxy.csproj", "{32C818B9-588B-4F0A-B6E9-B402B3EA2AA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetProxy", "AspNetProxy\AspNetProxy\AspNetProxy.csproj", "{32C818B9-588B-4F0A-B6E9-B402B3EA2AA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetApp", "AspNetProxy\AspNetApp\AspNetApp.csproj", "{726C54C1-221C-44C8-A391-88C7069EC81D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetApp", "AspNetProxy\AspNetApp\AspNetApp.csproj", "{726C54C1-221C-44C8-A391-88C7069EC81D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetExpression", "DotNetExpression\DotNetExpression.csproj", "{68A27FC9-1842-4081-9B17-813A511B6574}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -249,6 +251,10 @@ Global
 		{726C54C1-221C-44C8-A391-88C7069EC81D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{726C54C1-221C-44C8-A391-88C7069EC81D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{726C54C1-221C-44C8-A391-88C7069EC81D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68A27FC9-1842-4081-9B17-813A511B6574}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68A27FC9-1842-4081-9B17-813A511B6574}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68A27FC9-1842-4081-9B17-813A511B6574}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68A27FC9-1842-4081-9B17-813A511B6574}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
