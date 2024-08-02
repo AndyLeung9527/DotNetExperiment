@@ -1,10 +1,10 @@
-﻿using System.Linq.Expressions;
+﻿namespace DotNetExpression;
 
-namespace DotNetExpression;
+using System.Linq.Expressions;
 
 internal class Program
 {
-    //用法类似二叉树结构
+    //表达式树，用法类似二叉树结构，可以提供重用性
     static void Main(string[] args)
     {
         Expression<Func<int, int, int>> expression1_0 = (x, y) => x * y + 1 + 2;
@@ -67,6 +67,35 @@ internal class Program
             var result = func(new People { Id = 11, Name = "张三", Age = 20 });
             Console.WriteLine($"{result}");
         }
+
+        Expression<Func<People, bool>> expression3_0 = o => !(o.Name.Equals("李四") && o.Age < 18 || o.Id == 1);
+        // 表达式树的应用，按关键字拼装expression3_0
+        {
+            Expression<Func<People, bool>> exp = o => true;
+            Console.WriteLine("输入名称，为空跳过");
+            var name = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(name)) exp = exp.And(o => o.Name.Equals(name));
+            Console.WriteLine("输入最大年纪，为空跳过");
+            var strAge = Console.ReadLine();
+            if (int.TryParse(strAge, out var age)) exp = exp.And(o => o.Age < age);
+            Console.WriteLine("输入Id，为空跳过");
+            var strId = Console.ReadLine();
+            if (int.TryParse(strId, out var Id)) exp = exp.Or(o => o.Id == Id);
+            exp = exp.Not();
+        }
+        // 另一种拼装方法
+        {
+            Expression<Func<People, bool>> lambda1 = x => x.Name.Equals("李四");
+            Expression<Func<People, bool>> lambda2 = x => x.Age < 18;
+            Expression<Func<People, bool>> lambda3 = x => x.Id == 1;
+            Expression<Func<People, bool>> lambda4 = lambda1.And(lambda2).Or(lambda3).Not();
+        }
+
+        // 使用表达式做深拷贝(性能高)
+        {
+            var people = new People { Id = 1, Age = 18, Name = "王五" };
+            var copy = ExpressionGenericMapper<People, PeopleCopy>.Map(people);
+        }
     }
 }
 
@@ -75,4 +104,101 @@ internal class People
     public int Id { get; set; }
     public string Name { get; set; } = null!;
     public int Age { get; set; }
+}
+
+internal static class ExpressionExtend
+{
+    public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> exp1, Expression<Func<T, bool>> exp2)
+    {
+        var pNew = Expression.Parameter(typeof(T), "c");
+        var visitor = new NewExpressionVisitor(pNew);
+
+        var left = visitor.Replace(exp1.Body);
+        var right = visitor.Replace(exp2.Body);
+        var body = Expression.And(left, right);
+
+        return Expression.Lambda<Func<T, bool>>(body, pNew);
+    }
+
+    public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> exp1, Expression<Func<T, bool>> exp2)
+    {
+        var pNew = Expression.Parameter(typeof(T), "c");
+        var visitor = new NewExpressionVisitor(pNew);
+
+        var left = visitor.Replace(exp1.Body);
+        var right = visitor.Replace(exp2.Body);
+        var body = Expression.Or(left, right);
+
+        return Expression.Lambda<Func<T, bool>>(body, pNew);
+    }
+
+    public static Expression<Func<T, bool>> Not<T>(this Expression<Func<T, bool>> exp)
+    {
+        var pCandidate = exp.Parameters[0];
+        var body = Expression.Not(exp.Body);
+
+        return Expression.Lambda<Func<T, bool>>(body, pCandidate);
+    }
+}
+
+internal class NewExpressionVisitor : ExpressionVisitor
+{
+    public ParameterExpression NewParameter { get; private set; }
+
+    public NewExpressionVisitor(ParameterExpression param)
+    {
+        NewParameter = param;
+    }
+
+    public Expression Replace(Expression exp)
+    {
+        return Visit(exp);
+    }
+
+    protected override Expression VisitParameter(ParameterExpression node)
+    {
+        return NewParameter;
+    }
+}
+
+internal class PeopleCopy
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = null!;
+    public int Age { get; set; }
+}
+
+internal class ExpressionGenericMapper<TIn, TOut>
+{
+    static Func<TIn, TOut> s_mapFunc;
+    static ExpressionGenericMapper()
+    {
+        var p = Expression.Parameter(typeof(TIn), "p");
+        // 表达式目录树
+        var memberBindings = new List<MemberBinding>();
+        // 处理属性
+        foreach (var item in typeof(TOut).GetProperties())
+        {
+            var propertyInfo = typeof(TIn).GetProperty(item.Name);
+            if (propertyInfo == null) continue;
+            var property = Expression.Property(p, propertyInfo);
+            var memberBinding = Expression.Bind(item, property);
+            memberBindings.Add(memberBinding);
+        }
+        // 处理字段
+        foreach (var item in typeof(TOut).GetFields())
+        {
+            var fieldInfo = typeof(TIn).GetField(item.Name);
+            if (fieldInfo == null) continue;
+            var field = Expression.Field(p, fieldInfo);
+            var memberBinding = Expression.Bind(item, field);
+            memberBindings.Add(memberBinding);
+        }
+        // 组装转换过程
+        var memberInitExpression = Expression.MemberInit(Expression.New(typeof(TOut)), memberBindings);
+        var lambda = Expression.Lambda<Func<TIn, TOut>>(memberInitExpression, p);
+        //泛型缓存
+        s_mapFunc = lambda.Compile();
+    }
+    public static TOut Map(TIn source) => s_mapFunc(source);
 }
