@@ -17,51 +17,57 @@ class Program
 {
     static async Task Main(string[] args)
     {
+        // Custom metrics
+        var customMeter = new Meter("Custom.Example", "1.0.0");
+        var counter = customMeter.CreateCounter<int>("custom.count");
+
+        // Custom ActivitySource
+        var customActivitySource = new ActivitySource("Custom.Example");
+
         var builder = WebApplication.CreateBuilder(args);
+        var tracingOtlpEndpoint = builder.Configuration["OTLP_ENDPOINT_URL"];
+        var otel = builder.Services.AddOpenTelemetry();
 
-        builder.Services.AddOpenTelemetry()
-            // Add tracing
-            .WithTracing(builder => builder
-                .AddAspNetCoreInstrumentation((options) =>
-                {
-                    options.Filter = httpContext =>
-                    {
-                        // Only collect telemetry about HTTP GET reuquests
-                        return httpContext.Request.Method.Equals("GET");
-                    };
-                    options.EnrichWithHttpRequest = (activity, httpRequest) =>
-                    {
-                        activity.SetTag("requestProtocol", httpRequest.Protocol);
-                    };
-                    options.EnrichWithHttpResponse = (activity, httpResponse) =>
-                    {
-                        activity.SetTag("requestLength", httpResponse.ContentLength);
-                    };
-                    options.EnrichWithException = (activity, exception) =>
-                    {
-                        activity.SetTag("exceptionType", exception.GetType().ToString());
-                    };
-                })
-                .AddConsoleExporter())
-            // Add metrics
-            .WithMetrics(builder => builder
-                .AddAspNetCoreInstrumentation((options) =>
-                {
-                    options.Filter = (metricName, httpContext) =>
-                    {
-                        // Only collect telemetry about HTTP GET reuquests
-                        return httpContext.Request.Method.Equals("GET");
-                    };
-                    options.Enrich = (string metricName, HttpContext httpContext, ref TagList tags) =>
-                    {
+        // Configure OpenTelemetry Resources with the application name
+        otel.ConfigureResource(resource => resource.AddService(builder.Environment.ApplicationName));
 
-                    };
-                })
-                .AddConsoleExporter());
+        // Add metrics for ASP.NET Core and custom metrics and export to console
+        otel.WithMetrics(metrics => metrics
+            // Metrics provider from OpenTelemetry
+            .AddAspNetCoreInstrumentation()
+            // Metrics provides by ASP.NET Core in .NET 8
+            .AddMeter("Microsoft.AspNetCore.Hosting")
+            .AddMeter("Microsoft.AspNetCore.Server.Kestrel")
+            .AddMeter(customMeter.Name)
+            .AddConsoleExporter());
+
+        // Add Tracing for ASP.NET Core and custom ActivitySource and export to console
+        otel.WithTracing(tracing =>
+        {
+            tracing.AddAspNetCoreInstrumentation();
+            tracing.AddHttpClientInstrumentation();
+            tracing.AddSource(customActivitySource.Name);
+            if (tracingOtlpEndpoint != null)
+            {
+                tracing.AddOtlpExporter(otlpOptions =>
+                {
+                    otlpOptions.Endpoint = new Uri(tracingOtlpEndpoint);
+                });
+            }
+            else tracing.AddConsoleExporter();
+        });
 
         var app = builder.Build();
 
-        app.MapGet("/", () => "Hello World!");
+        app.MapGet("/", () =>
+        {
+            counter.Add(1);
+
+            using var activity = customActivitySource.StartActivity("CustomActivity");
+            activity?.SetTag("greeting", "Hello World!");
+
+            return "Hello World!";
+        });
 
         app.Run();
     }

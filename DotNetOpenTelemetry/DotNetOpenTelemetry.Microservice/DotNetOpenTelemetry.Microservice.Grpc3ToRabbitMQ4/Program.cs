@@ -24,10 +24,9 @@ internal class Program
                 .AddAspNetCoreInstrumentation(options => options.Filter = httpContext => !httpContext.Request.Path.Equals("/"))
                 .AddSource(nameof(Grpc3ToRabbitMQ4))
                 .AddConsoleExporter()
-                .AddJaegerExporter(options =>
+                .AddOtlpExporter(otlpOptions =>
                 {
-                    options.AgentHost = "192.168.5.217";
-                    options.AgentPort = 6831;
+                    otlpOptions.Endpoint = new Uri("http://localhost:4317/");
                 }));
 
         var app = builder.Build();
