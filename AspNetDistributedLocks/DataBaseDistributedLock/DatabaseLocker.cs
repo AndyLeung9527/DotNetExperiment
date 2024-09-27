@@ -26,11 +26,11 @@ public class DatabaseLocker : IDisposable
     /// <returns></returns>
     public async Task<Locker> LockAsync(string key, string id, TimeSpan expire, bool autoRenewal = false, CancellationToken cancellationToken = default)
     {
-        var scope = _serviceProvider.CreateScope();
-        var lockDbContext = scope.ServiceProvider.GetRequiredService<LockDbContext>();
         while (true)
         {
             cancellationToken.ThrowIfCancellationRequested();
+            using var scope = _serviceProvider.CreateScope();
+            using var lockDbContext = scope.ServiceProvider.GetRequiredService<LockDbContext>();
             var now = DateTimeOffset.Now;
             var expireTime = now.Add(expire);
 
@@ -43,7 +43,7 @@ public class DatabaseLocker : IDisposable
                     .ExecuteUpdateAsync(setters => setters
                         .SetProperty(b => b.Count, b => b.Count + 1)
                         .SetProperty(b => b.ExpireTime, expireTime));
-            if (updateRows > 0) return new Locker(key, id, expireTime, scope, new());
+            if (updateRows > 0) return new Locker(key, id, expireTime, _serviceProvider, new());
             //若锁不存在，则插入锁并设置：1.唯一标识，2.重入计数(初始值为1)，3.锁过期时间
             else if (updateRows <= 0)
             {
@@ -51,7 +51,7 @@ public class DatabaseLocker : IDisposable
                 {
                     lockDbContext.LockRecords.RemoveRange(lockDbContext.LockRecords.Where(o => o.Key == key));
 
-                    await lockDbContext.LockRecords.AddAsync(new LockRecord(key, id, 1, expireTime, now));//Todo: 高并发时异常，System.InvalidOperationException:“The instance of entity type 'LockRecord' cannot be tracked because another instance with the same key value for {'Key'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.”
+                    await lockDbContext.LockRecords.AddAsync(new LockRecord(key, id, 1, expireTime, now));
 
                     await lockDbContext.SaveChangesAsync();
                     var ctsAutoRenewal = new CancellationTokenSource();
@@ -66,7 +66,7 @@ public class DatabaseLocker : IDisposable
                             return renewalTimer;
                         });
                     }
-                    return new Locker(key, id, expireTime, scope, ctsAutoRenewal);
+                    return new Locker(key, id, expireTime, _serviceProvider, ctsAutoRenewal);
                 }
                 catch
                 {
@@ -133,16 +133,16 @@ public class Locker : IDisposable
 
     public DateTimeOffset ExpireTime { get; }
 
-    private readonly IServiceScope _serviceScope;
+    private readonly IServiceProvider _serviceProvider;
 
     private readonly CancellationTokenSource _ctsAutoRenewal;
 
-    public Locker(string key, string id, DateTimeOffset expireTime, IServiceScope serviceScope, CancellationTokenSource ctsAutoRenewal)
+    public Locker(string key, string id, DateTimeOffset expireTime, IServiceProvider serviceProvider, CancellationTokenSource ctsAutoRenewal)
     {
         Key = key;
         Id = id;
         ExpireTime = expireTime;
-        _serviceScope = serviceScope;
+        _serviceProvider = serviceProvider;
         _ctsAutoRenewal = ctsAutoRenewal;
     }
 
@@ -155,7 +155,8 @@ public class Locker : IDisposable
     {
         if (!_ctsAutoRenewal.IsCancellationRequested)
         {
-            var lockDbContext = _serviceScope.ServiceProvider.GetRequiredService<LockDbContext>();
+            using var scope = _serviceProvider.CreateScope();
+            using var lockDbContext = scope.ServiceProvider.GetRequiredService<LockDbContext>();
 
             var updatedRows = 0;
             var deletedRows = 0;
@@ -180,8 +181,6 @@ public class Locker : IDisposable
             {
                 await _ctsAutoRenewal.CancelAsync();
                 _ctsAutoRenewal.Dispose();
-                lockDbContext.Dispose();
-                _serviceScope.Dispose();
             }
 
             return (succeed, released);
@@ -195,7 +194,6 @@ public class Locker : IDisposable
         {
             _ctsAutoRenewal.Cancel();
             _ctsAutoRenewal.Dispose();
-            _serviceScope.Dispose();
         }
     }
 }
