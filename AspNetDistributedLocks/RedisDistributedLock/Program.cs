@@ -7,7 +7,7 @@ namespace RedisDistributedLock;
 
 public class Program
 {
-    static long seed = 0;
+    static long s_seed = 0;
 
     public static async Task Main(string[] args)
     {
@@ -48,7 +48,7 @@ public class Program
     /// <returns></returns>
     public static async Task<Results<Ok<string>, BadRequest<string>>> ConsumeAsync([FromServices] RedisLocker redisLocker, [FromServices] IOptions<ConfigurationOptions> options)
     {
-        var id = $"{Environment.CurrentManagedThreadId}:{Interlocked.Increment(ref seed)}";//需要生成唯一标识，真实的生产环境可使用分布式雪花id
+        var id = $"{Environment.CurrentManagedThreadId}:{Interlocked.Increment(ref s_seed)}";//需要生成唯一标识，真实的生产环境可使用分布式雪花id
         var connectionMultiplexer = await ConnectionMultiplexer.ConnectAsync(options.Value);
 
         //获取库存
@@ -69,6 +69,7 @@ public class Program
 
         //释放redis分布式锁
         var releaseResult = await locker.ReleaseAsync();
+
         return TypedResults.Ok($"秒杀成功，id{id}，解锁{(releaseResult.Succeeded ? "成功" : "失败")}，锁{(releaseResult.Released ? "已" : "未")}释放，剩余库存{stockNum}");
     }
 }
