@@ -1,2 +1,1 @@
-1.Upgrade to .Net7
-2.AspNetDistributedLocks compile
+1.Upgrade to .Net8
