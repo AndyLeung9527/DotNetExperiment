@@ -123,7 +123,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lib", "AspNetWebApiClient\L
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisDistributedLock", "AspNetDistributedLocks\RedisDistributedLock\RedisDistributedLock.csproj", "{99DC880A-5708-4B87-B8AD-75EBAFD0D644}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseDistributedLock", "AspNetDistributedLocks\DatabaseDistributedLock\DatabaseDistributedLock.csproj", "{1D49D8A4-12EE-4074-8105-151E9CBD4465}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseDistributedLock", "AspNetDistributedLocks\DatabaseDistributedLock\DatabaseDistributedLock.csproj", "{1D49D8A4-12EE-4074-8105-151E9CBD4465}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetPlugins", "DotNetPlugins", "{3A17B2C6-1DD1-4906-B01F-CAF640FDA9EF}"
+	ProjectSection(SolutionItems) = preProject
+		DotNetPlugins\plugin.targets = DotNetPlugins\plugin.targets
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetPlugins.Master", "DotNetPlugins\DotNetPlugins.Master\DotNetPlugins.Master.csproj", "{0A93A55E-3852-4A90-BD20-5F73AABA85BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetPlugins.PluginBase", "DotNetPlugins\DotNetPlugins.PluginBase\DotNetPlugins.PluginBase.csproj", "{31BF891F-F786-45BB-A818-3C35F8DBC662}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetPlugins.Plugin1", "DotNetPlugins\DotNetPlugins.Plugin1\DotNetPlugins.Plugin1.csproj", "{9F230180-B86C-46BB-B757-13F0C7F75C92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -307,6 +318,18 @@ Global
 		{1D49D8A4-12EE-4074-8105-151E9CBD4465}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D49D8A4-12EE-4074-8105-151E9CBD4465}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D49D8A4-12EE-4074-8105-151E9CBD4465}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A93A55E-3852-4A90-BD20-5F73AABA85BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A93A55E-3852-4A90-BD20-5F73AABA85BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A93A55E-3852-4A90-BD20-5F73AABA85BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A93A55E-3852-4A90-BD20-5F73AABA85BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31BF891F-F786-45BB-A818-3C35F8DBC662}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31BF891F-F786-45BB-A818-3C35F8DBC662}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31BF891F-F786-45BB-A818-3C35F8DBC662}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31BF891F-F786-45BB-A818-3C35F8DBC662}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F230180-B86C-46BB-B757-13F0C7F75C92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F230180-B86C-46BB-B757-13F0C7F75C92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F230180-B86C-46BB-B757-13F0C7F75C92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F230180-B86C-46BB-B757-13F0C7F75C92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -349,6 +372,9 @@ Global
 		{65017E71-E485-40EA-852A-2966A508935C} = {D8561C13-4242-4B38-A17C-3E830627CC26}
 		{99DC880A-5708-4B87-B8AD-75EBAFD0D644} = {9849F045-2409-4649-A8E7-794456C8A39C}
 		{1D49D8A4-12EE-4074-8105-151E9CBD4465} = {9849F045-2409-4649-A8E7-794456C8A39C}
+		{0A93A55E-3852-4A90-BD20-5F73AABA85BF} = {3A17B2C6-1DD1-4906-B01F-CAF640FDA9EF}
+		{31BF891F-F786-45BB-A818-3C35F8DBC662} = {3A17B2C6-1DD1-4906-B01F-CAF640FDA9EF}
+		{9F230180-B86C-46BB-B757-13F0C7F75C92} = {3A17B2C6-1DD1-4906-B01F-CAF640FDA9EF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2A6B72B4-0A0E-4CB4-8C72-65FA2178875B}
