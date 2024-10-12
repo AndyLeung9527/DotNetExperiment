@@ -132,9 +132,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetPlugins", "DotNetPlug
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetPlugins.Master", "DotNetPlugins\DotNetPlugins.Master\DotNetPlugins.Master.csproj", "{0A93A55E-3852-4A90-BD20-5F73AABA85BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetPlugins.PluginBase", "DotNetPlugins\DotNetPlugins.PluginBase\DotNetPlugins.PluginBase.csproj", "{31BF891F-F786-45BB-A818-3C35F8DBC662}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetPlugins.PluginBase", "DotNetPlugins\DotNetPlugins.PluginBase\DotNetPlugins.PluginBase.csproj", "{31BF891F-F786-45BB-A818-3C35F8DBC662}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetPlugins.Plugin1", "DotNetPlugins\DotNetPlugins.Plugin1\DotNetPlugins.Plugin1.csproj", "{9F230180-B86C-46BB-B757-13F0C7F75C92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetPlugins.Plugin1", "DotNetPlugins\DotNetPlugins.Plugin1\DotNetPlugins.Plugin1.csproj", "{9F230180-B86C-46BB-B757-13F0C7F75C92}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetRoslyn", "DotNetRoslyn", "{F11575E5-56BB-4CF3-AC66-CA0341589B55}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetRoslyn.Analyzer", "DotNetRoslyn.Analyzer", "{DAFB170B-E26B-4BD0-91CD-A758E827131E}"
+	ProjectSection(SolutionItems) = preProject
+		DotNetRoslyn\DotNetRoslyn.Analyzer\DotNetRoslyn.Analyzer.Demo\README.md = DotNetRoslyn\DotNetRoslyn.Analyzer\DotNetRoslyn.Analyzer.Demo\README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetRoslyn.Analyzer.Demo", "DotNetRoslyn\DotNetRoslyn.Analyzer\DotNetRoslyn.Analyzer.Demo\DotNetRoslyn.Analyzer.Demo\DotNetRoslyn.Analyzer.Demo.csproj", "{18A5412A-E149-43A7-9787-BC5A8CA8F345}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetRoslyn.Analyzer.Demo.CodeFixes", "DotNetRoslyn\DotNetRoslyn.Analyzer\DotNetRoslyn.Analyzer.Demo\DotNetRoslyn.Analyzer.Demo.CodeFixes\DotNetRoslyn.Analyzer.Demo.CodeFixes.csproj", "{CDC15DEC-6717-41BD-A822-3F166931CE85}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetRoslyn.Analyzer.Demo.Package", "DotNetRoslyn\DotNetRoslyn.Analyzer\DotNetRoslyn.Analyzer.Demo\DotNetRoslyn.Analyzer.Demo.Package\DotNetRoslyn.Analyzer.Demo.Package.csproj", "{667CBA44-5447-4361-96D0-218443586EA7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetRoslyn.Analyzer.Demo.Test", "DotNetRoslyn\DotNetRoslyn.Analyzer\DotNetRoslyn.Analyzer.Demo\DotNetRoslyn.Analyzer.Demo.Test\DotNetRoslyn.Analyzer.Demo.Test.csproj", "{0865DA30-D097-47C1-8500-6B651644DBDD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetRoslyn.Analyzer.Demo.Vsix", "DotNetRoslyn\DotNetRoslyn.Analyzer\DotNetRoslyn.Analyzer.Demo\DotNetRoslyn.Analyzer.Demo.Vsix\DotNetRoslyn.Analyzer.Demo.Vsix.csproj", "{F0F26EF9-C672-46F0-B784-6C3B068A6BFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetRoslyn.AuxiliaryProject", "DotNetRoslyn\DotNetRoslyn.AuxiliaryProject\DotNetRoslyn.AuxiliaryProject.csproj", "{09027974-D5B6-434A-AA60-020C95F96BD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -330,6 +349,30 @@ Global
 		{9F230180-B86C-46BB-B757-13F0C7F75C92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F230180-B86C-46BB-B757-13F0C7F75C92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F230180-B86C-46BB-B757-13F0C7F75C92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18A5412A-E149-43A7-9787-BC5A8CA8F345}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18A5412A-E149-43A7-9787-BC5A8CA8F345}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18A5412A-E149-43A7-9787-BC5A8CA8F345}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18A5412A-E149-43A7-9787-BC5A8CA8F345}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDC15DEC-6717-41BD-A822-3F166931CE85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDC15DEC-6717-41BD-A822-3F166931CE85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDC15DEC-6717-41BD-A822-3F166931CE85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDC15DEC-6717-41BD-A822-3F166931CE85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{667CBA44-5447-4361-96D0-218443586EA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{667CBA44-5447-4361-96D0-218443586EA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{667CBA44-5447-4361-96D0-218443586EA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{667CBA44-5447-4361-96D0-218443586EA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0865DA30-D097-47C1-8500-6B651644DBDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0865DA30-D097-47C1-8500-6B651644DBDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0865DA30-D097-47C1-8500-6B651644DBDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0865DA30-D097-47C1-8500-6B651644DBDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0F26EF9-C672-46F0-B784-6C3B068A6BFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0F26EF9-C672-46F0-B784-6C3B068A6BFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0F26EF9-C672-46F0-B784-6C3B068A6BFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0F26EF9-C672-46F0-B784-6C3B068A6BFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09027974-D5B6-434A-AA60-020C95F96BD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09027974-D5B6-434A-AA60-020C95F96BD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09027974-D5B6-434A-AA60-020C95F96BD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09027974-D5B6-434A-AA60-020C95F96BD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -375,6 +418,13 @@ Global
 		{0A93A55E-3852-4A90-BD20-5F73AABA85BF} = {3A17B2C6-1DD1-4906-B01F-CAF640FDA9EF}
 		{31BF891F-F786-45BB-A818-3C35F8DBC662} = {3A17B2C6-1DD1-4906-B01F-CAF640FDA9EF}
 		{9F230180-B86C-46BB-B757-13F0C7F75C92} = {3A17B2C6-1DD1-4906-B01F-CAF640FDA9EF}
+		{DAFB170B-E26B-4BD0-91CD-A758E827131E} = {F11575E5-56BB-4CF3-AC66-CA0341589B55}
+		{18A5412A-E149-43A7-9787-BC5A8CA8F345} = {DAFB170B-E26B-4BD0-91CD-A758E827131E}
+		{CDC15DEC-6717-41BD-A822-3F166931CE85} = {DAFB170B-E26B-4BD0-91CD-A758E827131E}
+		{667CBA44-5447-4361-96D0-218443586EA7} = {DAFB170B-E26B-4BD0-91CD-A758E827131E}
+		{0865DA30-D097-47C1-8500-6B651644DBDD} = {DAFB170B-E26B-4BD0-91CD-A758E827131E}
+		{F0F26EF9-C672-46F0-B784-6C3B068A6BFA} = {DAFB170B-E26B-4BD0-91CD-A758E827131E}
+		{09027974-D5B6-434A-AA60-020C95F96BD1} = {F11575E5-56BB-4CF3-AC66-CA0341589B55}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2A6B72B4-0A0E-4CB4-8C72-65FA2178875B}
