@@ -21,4 +21,3 @@ public class AutoFakeItEasyAttribute : AutoDataAttribute
         return fixture;
     }
 }
-

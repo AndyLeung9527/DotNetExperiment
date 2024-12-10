@@ -144,3 +144,10 @@ public void Test1(int result, int i1, int i2){
 }
 ```
 
+### 4.集成测试
+
+项目内部使用真实代码测试，依赖的外部服务(比如http, grpc等)使用Mock
+
+### 5.E2E测试
+
+使用真实代码测试，可以使用Playwright工具模拟浏览器点击测试
