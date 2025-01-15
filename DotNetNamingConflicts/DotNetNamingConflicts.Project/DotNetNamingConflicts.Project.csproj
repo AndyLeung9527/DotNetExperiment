@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <ProjectReference Include="..\DotNetNamingConflicts.Lib1\DotNetNamingConflicts.Lib1.csproj">
+		  <Aliases>LibraryA</Aliases>
+	  </ProjectReference>
+	  <ProjectReference Include="..\DotNetNamingConflicts.Lib2\DotNetNamingConflicts.Lib2.csproj">
+		  <Aliases>LibraryB</Aliases>
+	  </ProjectReference>
+  </ItemGroup>
+
+</Project>
