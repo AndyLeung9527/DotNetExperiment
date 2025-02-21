@@ -35,11 +35,45 @@ public class Program
                         ValidAudience = jwtTokenOptions.Audience,
                         IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(jwtTokenOptions.SecurityKey))
                     };
+
+                    // 自定义响应
                     //options.Events = new JwtBearerEvents()
                     //{
-                    //    // 身份验证不通过处理
+                    //    // Token解析失败（如过期、签名错误）
+                    //    OnAuthenticationFailed = context =>
+                    //    {
+                    //        context.Response.StatusCode = 200;
+                    //        context.Response.ContentType = "application/json";
+                    //        if (context.Exception is SecurityTokenExpiredException)
+                    //        {
+                    //            return context.Response.WriteAsJsonAsync(new { code = 401, message = "Token已过期" });
+                    //        }
+                    //        if (context.Exception is SecurityTokenInvalidSignatureException)
+                    //        {
+                    //            return context.Response.WriteAsJsonAsync(new { code = 401, message = "Token签名无效" });
+                    //        }
+
+                    //        return context.Response.WriteAsJsonAsync(new { code = 401, message = "Token验证失败" });
+                    //    },
+                    //    // 请求未携带Token或Token无效
                     //    OnChallenge = context =>
                     //    {
+                    //        context.HandleResponse();
+                    //        if (!context.Response.HasStarted)
+                    //        {
+                    //            context.Response.StatusCode = 200;
+                    //            context.Response.ContentType = "application/json";
+                    //            return context.Response.WriteAsJsonAsync(new { code = 401, message = "请登录" });
+                    //        }
+
+                    //        return Task.CompletedTask;
+                    //    },
+                    //    // Token有效但权限不足
+                    //    OnForbidden = context =>
+                    //    {
+                    //        context.Response.StatusCode = 200;
+                    //        context.Response.ContentType = "application/json";
+                    //        return context.Response.WriteAsJsonAsync(new { code = 403, message = "无权限访问" });
                     //    }
                     //};
                 });
