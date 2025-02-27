@@ -513,6 +513,47 @@ public static class TxtConfigurationExtensions
 }
 ```
 
+### 9.volatile
+
+`volatile`关键字用于修饰字段，字段会被禁止编译器和处理器对其执行指令重排序或缓存优化
+
+```c#
+public class Program
+{
+    static void Main(string[] args)
+    {
+        Worker workerObject = new Worker();
+
+        // 一秒后调用Stop方法
+        Task.Run(() =>
+        {
+            Thread.Sleep(1000);
+            workerObject.Stop();
+        });
+
+        Console.WriteLine("Main thread: 开始");
+        workerObject.Start();
+        Console.WriteLine("Main thread: 终止");
+    }
+}
+
+public class Worker
+{
+    //private bool active = true;
+    private volatile bool active = true;
+    public void Start()
+    {
+        // Release模式下会被编译器优化为while (true), 使用volatile关键字禁用编译器优化
+        while (active)
+        {
+        }
+    }
+    public void Stop()
+    {
+        active = false;
+    }
+}
+```
 
 ## 二、性能调优篇
 
