@@ -1,7 +1,5 @@
 ﻿using DotNetRabbitMQ.ModeDemo.Utils;
 using RabbitMQ.Client;
-using System;
-using System.Collections.Generic;
 
 namespace DotNetRabbitMQ.ModeDemo.Producer
 {
@@ -10,102 +8,118 @@ namespace DotNetRabbitMQ.ModeDemo.Producer
     /// </summary>
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            #region 简单模式 & 工作模式 & Async
-            using (var conn = RabbitMQHelper.GetConnection())
-            {
-                using (var channel = conn.CreateModel())
-                {
-                    channel.QueueDeclare(RabbitMQHelper.Queue_1, false, false, false, null);
-                    string[] arrMsg = new string[] { "test1", "test2", "test3", "test4", "test5" };
-                    foreach (string msg in arrMsg)
-                        channel.BasicPublish(string.Empty, RabbitMQHelper.Queue_1, null, System.Text.Encoding.UTF8.GetBytes(msg));
-                    Console.WriteLine("Publish succeed.");
-                }
-            }
+            #region 简单模式 & 工作队列模式
+            //using (var conn = await RabbitMQHelper.GetConnectionAsync())
+            //{
+            //    using (var channel = await conn.CreateChannelAsync())
+            //    {
+            //        await channel.QueueDeclareAsync(RabbitMQHelper.Queue_1, false, false, false, null);
+            //        string[] arrMsg = ["test1", "test2", "test3", "test4", "test5"];
+            //        /* 在BasicPublishAsync中传参
+            //        var properties = new BasicProperties
+            //        {
+            //            Persistent = true,// 设置为持久消息, 保存到磁盘
+            //            Expiration = "6000"//消息过期时间, 单位毫秒
+            //        };
+            //         */
+            //        foreach (string msg in arrMsg)
+            //            await channel.BasicPublishAsync(string.Empty, RabbitMQHelper.Queue_1, false, System.Text.Encoding.UTF8.GetBytes(msg));
+            //        Console.WriteLine("Publish succeed.");
+            //    }
+            //}
             #endregion
 
             #region 发布订阅模式
-            //using (var conn = RabbitMQHelper.GetConnection())
+            //using (var conn = await RabbitMQHelper.GetConnectionAsync())
             //{
-            //    using (var channel = conn.CreateModel())
+            //    using (var channel = await conn.CreateChannelAsync())
             //    {
-            //        channel.ExchangeDeclare(RabbitMQHelper.Exchange_1, ExchangeType.Fanout);
-            //        channel.QueueDeclare(RabbitMQHelper.Queue_1, false, false, false, null);
-            //        channel.QueueDeclare(RabbitMQHelper.Queue_2, false, false, false, null);
-            //        channel.QueueDeclare(RabbitMQHelper.Queue_3, false, false, false, null);
-            //        channel.QueueBind(RabbitMQHelper.Queue_1, RabbitMQHelper.Exchange_1, string.Empty);
-            //        channel.QueueBind(RabbitMQHelper.Queue_2, RabbitMQHelper.Exchange_1, string.Empty);
-            //        channel.QueueBind(RabbitMQHelper.Queue_3, RabbitMQHelper.Exchange_1, string.Empty);
-            //        string[] arrMsg = new string[] { "test1", "test2", "test3", "test4", "test5" };
+            //        await channel.ExchangeDeclareAsync(RabbitMQHelper.Exchange_1, ExchangeType.Fanout);
+            //        await channel.QueueDeclareAsync(RabbitMQHelper.Queue_1, false, false, false, null);
+            //        await channel.QueueDeclareAsync(RabbitMQHelper.Queue_2, false, false, false, null);
+            //        await channel.QueueDeclareAsync(RabbitMQHelper.Queue_3, false, false, false, null);
+            //        await channel.QueueBindAsync(RabbitMQHelper.Queue_1, RabbitMQHelper.Exchange_1, string.Empty);
+            //        await channel.QueueBindAsync(RabbitMQHelper.Queue_2, RabbitMQHelper.Exchange_1, string.Empty);
+            //        await channel.QueueBindAsync(RabbitMQHelper.Queue_3, RabbitMQHelper.Exchange_1, string.Empty);
+            //        string[] arrMsg = ["test1", "test2", "test3", "test4", "test5"];
             //        foreach (string msg in arrMsg)
-            //            channel.BasicPublish(RabbitMQHelper.Exchange_1, string.Empty, null, System.Text.Encoding.UTF8.GetBytes(msg));
+            //            await channel.BasicPublishAsync(RabbitMQHelper.Exchange_1, string.Empty, false, System.Text.Encoding.UTF8.GetBytes(msg));
             //        Console.WriteLine("Publish succeed.");
             //    }
             //}
             #endregion
 
             #region 路由模式
-            //using (var conn = RabbitMQHelper.GetConnection())
+            //using (var conn = await RabbitMQHelper.GetConnectionAsync())
             //{
-            //    using (var channel = conn.CreateModel())
+            //    using (var channel = await conn.CreateChannelAsync())
             //    {
-            //        channel.ExchangeDeclare(RabbitMQHelper.Exchange_1, ExchangeType.Direct);
-            //        channel.QueueDeclare(RabbitMQHelper.Queue_1, false, false, false, null);
-            //        channel.QueueDeclare(RabbitMQHelper.Queue_2, false, false, false, null);
-            //        channel.QueueDeclare(RabbitMQHelper.Queue_3, false, false, false, null);
-            //        channel.QueueBind(RabbitMQHelper.Queue_1, RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_1);
-            //        channel.QueueBind(RabbitMQHelper.Queue_2, RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_1);
-            //        channel.QueueBind(RabbitMQHelper.Queue_3, RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_1);
-            //        string[] arrMsg = new string[] { "test1", "test2", "test3", "test4", "test5" };
+            //        await channel.ExchangeDeclareAsync(RabbitMQHelper.Exchange_1, ExchangeType.Direct);
+            //        await channel.QueueDeclareAsync(RabbitMQHelper.Queue_1, false, false, false, null);
+            //        await channel.QueueDeclareAsync(RabbitMQHelper.Queue_2, false, false, false, null);
+            //        await channel.QueueDeclareAsync(RabbitMQHelper.Queue_3, false, false, false, null);
+            //        await channel.QueueBindAsync(RabbitMQHelper.Queue_1, RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_1);
+            //        await channel.QueueBindAsync(RabbitMQHelper.Queue_2, RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_1);
+            //        await channel.QueueBindAsync(RabbitMQHelper.Queue_3, RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_1);
+            //        string[] arrMsg = ["test1", "test2", "test3", "test4", "test5"];
             //        foreach (string msg in arrMsg)
-            //            channel.BasicPublish(RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_1, null, System.Text.Encoding.UTF8.GetBytes(msg));
+            //            await channel.BasicPublishAsync(RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_1, false, System.Text.Encoding.UTF8.GetBytes(msg));
             //        Console.WriteLine("Publish succeed.");
             //    }
             //}
             #endregion
 
             #region 主题模式
-            //using (var conn = RabbitMQHelper.GetConnection())
-            //{
-            //    using (var channel = conn.CreateModel())
-            //    {
-            //        channel.ExchangeDeclare(RabbitMQHelper.Exchange_1, ExchangeType.Topic);
-            //        channel.QueueDeclare(RabbitMQHelper.Queue_1, false, false, false, null);
-            //        channel.QueueDeclare(RabbitMQHelper.Queue_2, false, false, false, null);
-            //        channel.QueueDeclare(RabbitMQHelper.Queue_3, false, false, false, null);
-            //        channel.QueueBind(RabbitMQHelper.Queue_1, RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_Topic_1);
-            //        channel.QueueBind(RabbitMQHelper.Queue_2, RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_Topic_2);
-            //        channel.QueueBind(RabbitMQHelper.Queue_3, RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_Topic_Etc);
-            //        string[] arrMsg = new string[] { "test1", "test2", "test3", "test4", "test5" };
-            //        foreach (string msg in arrMsg)
-            //            channel.BasicPublish(RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_Topic_Publish, null, System.Text.Encoding.UTF8.GetBytes(msg));
-            //        Console.WriteLine("Publish succeed.");
-            //    }
-            //}
+            using (var conn = await RabbitMQHelper.GetConnectionAsync())
+            {
+                using (var channel = await conn.CreateChannelAsync())
+                {
+                    await channel.ExchangeDeclareAsync(RabbitMQHelper.Exchange_1, ExchangeType.Topic);
+                    await channel.QueueDeclareAsync(RabbitMQHelper.Queue_1, false, false, false, null);
+                    await channel.QueueDeclareAsync(RabbitMQHelper.Queue_2, false, false, false, null);
+                    await channel.QueueDeclareAsync(RabbitMQHelper.Queue_3, false, false, false, null);
+                    await channel.QueueBindAsync(RabbitMQHelper.Queue_1, RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_Topic_1);
+                    await channel.QueueBindAsync(RabbitMQHelper.Queue_2, RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_Topic_2);
+                    await channel.QueueBindAsync(RabbitMQHelper.Queue_3, RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_Topic_Etc);
+                    string[] arrMsg = ["test1", "test2", "test3", "test4", "test5"];
+                    foreach (string msg in arrMsg)
+                        await channel.BasicPublishAsync(RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_Topic_Publish, false, System.Text.Encoding.UTF8.GetBytes(msg));
+                    Console.WriteLine("Publish succeed.");
+                }
+            }
             #endregion
 
             #region 重试 & 死信(延迟)
-            //using (var conn = RabbitMQHelper.GetConnection())
-            //{
-            //    using(var channel = conn.CreateModel())
-            //    {
-            //        channel.ExchangeDeclare(RabbitMQHelper.Exchange_1, ExchangeType.Direct);
-            //        channel.ExchangeDeclare(RabbitMQHelper.Exchange_Retry, ExchangeType.Direct);
-            //        channel.ExchangeDeclare(RabbitMQHelper.Exchane_Dead, ExchangeType.Direct);
-            //        channel.QueueDeclare(RabbitMQHelper.Queue_1, true, false, false, new Dictionary<string, object> { { "x-dead-letter-exchange", RabbitMQHelper.Exchane_Dead } });//指定死信交换机,用于将Queue_1队列中失败的消息投递到Exchane_Dead交换机
-            //        channel.QueueDeclare(RabbitMQHelper.Queue_2, true, false, false, new Dictionary<string, object> { { "x-dead-letter-exchange", RabbitMQHelper.Exchange_1 }, { "x-message-ttl", 6000 } });//指定死信交换机,用于将Queue_2队列中超时的消息投递到Exchange_1交换机;x-message-ttl定义消息的最大停留时间,超时后投递到死信队列
-            //        channel.QueueDeclare(RabbitMQHelper.Queue_3, true, false, false);
-            //        channel.QueueBind(RabbitMQHelper.Queue_1, RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_1);
-            //        channel.QueueBind(RabbitMQHelper.Queue_2, RabbitMQHelper.Exchange_Retry, RabbitMQHelper.RoutingKey_1);
-            //        channel.QueueBind(RabbitMQHelper.Queue_3, RabbitMQHelper.Exchane_Dead, RabbitMQHelper.RoutingKey_1);
-            //        string[] arrMsg = new string[] { "test1", "test2", "test3", "test4", "test5" };
-            //        foreach (string msg in arrMsg)
-            //            channel.BasicPublish(RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_1, null, System.Text.Encoding.UTF8.GetBytes(msg));
-            //        Console.WriteLine("Publish succeed.");
-            //    }
-            //}
+            using (var conn = await RabbitMQHelper.GetConnectionAsync())
+            {
+                using (var channel = await conn.CreateChannelAsync())
+                {
+                    await channel.ExchangeDeclareAsync(RabbitMQHelper.Exchange_1, ExchangeType.Direct);
+                    await channel.ExchangeDeclareAsync(RabbitMQHelper.Exchange_Retry, ExchangeType.Direct);
+                    await channel.ExchangeDeclareAsync(RabbitMQHelper.Exchane_Dead, ExchangeType.Direct);
+                    await channel.QueueDeclareAsync(RabbitMQHelper.Queue_1, true, false, false, new Dictionary<string, object?>
+                    {
+                        ["x-dead-letter-exchange"] = RabbitMQHelper.Exchane_Dead, //指定死信交换机,用于将Queue_1队列中失败的消息投递到Exchane_Dead交换机
+                        ["x-dead-letter-routing-key"] = RabbitMQHelper.RoutingKey_1, //指定死信路由键,用于将Queue_1队列中失败的消息投递到Exchane_Dead交换机的RoutingKey_1路由键
+                        ["x-message-ttl"] = 3000 //定义消息默认的最大停留时间,超时后投递到死信队列
+                    });
+                    await channel.QueueDeclareAsync(RabbitMQHelper.Queue_2, true, false, false, new Dictionary<string, object?>
+                    {
+                        ["x-dead-letter-exchange"] = RabbitMQHelper.Exchange_1, ////指定死信交换机,用于将Queue_2队列中超时的消息投递到Exchange_1交换机
+                        ["x-message-ttl"] = 6000 //定义消息默认的最大停留时间,超时后投递到死信队列
+                    });
+                    await channel.QueueDeclareAsync(RabbitMQHelper.Queue_3, true, false, false);
+                    await channel.QueueBindAsync(RabbitMQHelper.Queue_1, RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_1);
+                    await channel.QueueBindAsync(RabbitMQHelper.Queue_2, RabbitMQHelper.Exchange_Retry, RabbitMQHelper.RoutingKey_1);
+                    await channel.QueueBindAsync(RabbitMQHelper.Queue_3, RabbitMQHelper.Exchane_Dead, RabbitMQHelper.RoutingKey_1);
+                    string[] arrMsg = ["test1", "test2", "test3", "test4", "test5"];
+                    foreach (string msg in arrMsg)
+                        await channel.BasicPublishAsync(RabbitMQHelper.Exchange_1, RabbitMQHelper.RoutingKey_1, false, System.Text.Encoding.UTF8.GetBytes(msg));
+                    Console.WriteLine("Publish succeed.");
+                }
+            }
             #endregion
 
             #region 消息持久化 & 集群
