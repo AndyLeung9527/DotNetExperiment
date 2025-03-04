@@ -203,6 +203,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetAuth.AuthenticationAn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetAuth.CustomAuthorizationPolicy", "AspNetAuth\AspNetAuth.CustomAuthorizationPolicy\AspNetAuth.CustomAuthorizationPolicy.csproj", "{121DFC63-C09B-4256-82C6-ECA7934870C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetResilience", "DotNetResilience\DotNetResilience.csproj", "{D1265C52-90CA-459A-A6AD-E2734F44239E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -497,6 +499,10 @@ Global
 		{121DFC63-C09B-4256-82C6-ECA7934870C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{121DFC63-C09B-4256-82C6-ECA7934870C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{121DFC63-C09B-4256-82C6-ECA7934870C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1265C52-90CA-459A-A6AD-E2734F44239E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1265C52-90CA-459A-A6AD-E2734F44239E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1265C52-90CA-459A-A6AD-E2734F44239E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1265C52-90CA-459A-A6AD-E2734F44239E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
