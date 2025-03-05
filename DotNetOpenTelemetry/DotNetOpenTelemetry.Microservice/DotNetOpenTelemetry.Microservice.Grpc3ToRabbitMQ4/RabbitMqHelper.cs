@@ -1,7 +1,6 @@
-﻿namespace DotNetOpenTelemetry.Microservice.Grpc3ToRabbitMQ4;
+﻿using RabbitMQ.Client;
 
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
+namespace DotNetOpenTelemetry.Microservice.Grpc3ToRabbitMQ4;
 
 public static class RabbitMqHelper
 {
@@ -14,7 +13,7 @@ public static class RabbitMqHelper
     {
         _connectionFactory = new ConnectionFactory
         {
-            HostName = "192.168.5.217",
+            HostName = "localhost",
             UserName = "guest",
             Password = "guest",
             Port = 5672,
@@ -23,16 +22,16 @@ public static class RabbitMqHelper
         };
     }
 
-    public static IConnection CreateConnection()
+    public static Task<IConnection> CreateConnectionAsync()
     {
-        return _connectionFactory.CreateConnection();
+        return _connectionFactory.CreateConnectionAsync();
     }
 
-    public static IModel CreateModelAndDeclareQueue(IConnection connection)
+    public static async Task<IChannel> CreateModelAndDeclareQueueAsync(IConnection connection)
     {
-        var channel = connection.CreateModel();
+        var channel = await connection.CreateChannelAsync();
 
-        channel.QueueDeclare(
+        await channel.QueueDeclareAsync(
             queue: TestQueueName,
             durable: false,
             exclusive: false,

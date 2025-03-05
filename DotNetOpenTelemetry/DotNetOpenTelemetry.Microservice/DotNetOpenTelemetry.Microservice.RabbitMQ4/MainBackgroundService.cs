@@ -9,18 +9,18 @@ using System.Text;
 public class MainBackgroundService : BackgroundService
 {
     IConnection? _connection;
-    IModel? _model;
+    IChannel? _channel;
 
-    public override Task StartAsync(CancellationToken cancellationToken)
+    public override async Task StartAsync(CancellationToken cancellationToken)
     {
-        _connection = RabbitMqHelper.CreateConnection();
-        _model = RabbitMqHelper.CreateModelAndDeclareQueue(_connection);
-        return base.StartAsync(cancellationToken);
+        _connection = await RabbitMqHelper.CreateConnectionAsync();
+        _channel = await RabbitMqHelper.CreateModelAndDeclareQueueAsync(_connection);
+        await base.StartAsync(cancellationToken);
     }
 
     public override Task StopAsync(CancellationToken cancellationToken)
     {
-        _model?.Dispose();
+        _channel?.Dispose();
         _connection?.Dispose();
         return base.StopAsync(cancellationToken);
     }
@@ -29,16 +29,19 @@ public class MainBackgroundService : BackgroundService
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        var consumer = new EventingBasicConsumer(_model);
+        var consumer = new AsyncEventingBasicConsumer(_channel!);
 
-        consumer.Received += (bc, ea) =>
+        consumer.ReceivedAsync += (bc, ea) =>
         {
             var parentContext = Program.Propagator.Extract(default, ea.BasicProperties, (props, key) =>
             {
-                if (props.Headers.TryGetValue(key, out var value))
+                if (props.Headers?.TryGetValue(key, out var value) ?? false)
                 {
                     var bytes = value as byte[];
-                    return new[] { Encoding.UTF8.GetString(bytes) };
+                    if (bytes != null)
+                    {
+                        return new[] { Encoding.UTF8.GetString(bytes) };
+                    }
                 }
 
                 return Enumerable.Empty<string>();
@@ -58,9 +61,10 @@ public class MainBackgroundService : BackgroundService
             activity?.SetTag("messaging.rabbitmq.routing_key", RabbitMqHelper.TestQueueName);
 
             Thread.Sleep(100);
+            return Task.CompletedTask;
         };
 
-        _model.BasicConsume(queue: RabbitMqHelper.TestQueueName, autoAck: true, consumer: consumer);
+        await _channel!.BasicConsumeAsync(queue: RabbitMqHelper.TestQueueName, autoAck: true, consumer: consumer);
 
         await Task.CompletedTask.ConfigureAwait(false);
     }

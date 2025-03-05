@@ -1,20 +1,21 @@
-﻿namespace DotNetOpenTelemetry.Microservice.WebApi2ToGrpc3;
-
-using DotNetOpenTelemetry.Microservice.Protos;
+﻿using DotNetOpenTelemetry.Microservice.Protos;
 using Grpc.Core;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 using OpenTelemetry;
 using OpenTelemetry.Context.Propagation;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using System.Diagnostics;
 
+namespace DotNetOpenTelemetry.Microservice.WebApi2ToGrpc3;
+
 internal class Program
 {
     static readonly ActivitySource ActivitySource = new(nameof(WebApi2ToGrpc3));
     static readonly TextMapPropagator Propagator = Propagators.DefaultTextMapPropagator;
 
-    static async Task Main(string[] args)
+    static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -40,7 +41,7 @@ internal class Program
         {
             var parentContext = Propagator.Extract(default, httpContext.Request.Headers, (headers, key) =>
             {
-                return new string[] { headers[key] };
+                return headers.TryGetValue(key, out var value) ? value : StringValues.Empty;
             });
             Baggage.Current = parentContext.Baggage;
 

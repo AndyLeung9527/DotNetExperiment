@@ -1,14 +1,13 @@
-﻿namespace DotNetOpenTelemetry.Microservice.WebApi1ToWebApi2;
-
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Mvc;
 using OpenTelemetry;
 using OpenTelemetry.Context.Propagation;
-using OpenTelemetry.Trace;
-using System.Net.Http.Headers;
-using OpenTelemetry.Resources;
 using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+using System.Diagnostics;
 using System.Diagnostics.Metrics;
+
+namespace DotNetOpenTelemetry.Microservice.WebApi1ToWebApi2;
 
 internal class Program
 {
@@ -19,7 +18,7 @@ internal class Program
     static readonly Counter<long> CustomCounter = CustomMeter.CreateCounter<long>(nameof(CustomCounter));
     static readonly TextMapPropagator Propagator = Propagators.DefaultTextMapPropagator;
 
-    static async Task Main(string[] args)
+    static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 

@@ -1,29 +1,30 @@
-﻿namespace DotNetOpenTelemetry.Microservice.Grpc3ToRabbitMQ4.Services;
-
-using DotNetOpenTelemetry.Microservice.Protos;
+﻿using DotNetOpenTelemetry.Microservice.Protos;
 using Grpc.Core;
+using Microsoft.Extensions.Primitives;
 using OpenTelemetry;
 using OpenTelemetry.Context.Propagation;
 using RabbitMQ.Client;
 using System.Diagnostics;
 using System.Text;
 
+namespace DotNetOpenTelemetry.Microservice.Grpc3ToRabbitMQ4.Services;
+
 public class CasualService : Casual.CasualBase
 {
-    public override Task<TransmitResult> Transmit(TransmitRequest request, ServerCallContext context)
+    public override async Task<TransmitResult> Transmit(TransmitRequest request, ServerCallContext context)
     {
         var httpContext = context.GetHttpContext();
         var parentContext = Program.Propagator.Extract(default, httpContext.Request.Headers, (headers, key) =>
         {
-            return new string[] { headers[key] };
+            return headers.TryGetValue(key, out var value) ? value : StringValues.Empty;
         });
         Baggage.Current = parentContext.Baggage;
 
         var activityName = $"{nameof(Grpc3ToRabbitMQ4)}_Transmit";
         using var activity = Program.ActivitySource.StartActivity(activityName, ActivityKind.Server, parentContext.ActivityContext);
-        using var connection = RabbitMqHelper.CreateConnection();
-        using var channel = RabbitMqHelper.CreateModelAndDeclareQueue(connection);
-        var props = channel.CreateBasicProperties();
+        using var connection = await RabbitMqHelper.CreateConnectionAsync();
+        using var channel = await RabbitMqHelper.CreateModelAndDeclareQueueAsync(connection);
+        var props = new BasicProperties();
 
         ActivityContext contextToInject = default;
         if (activity != null)
@@ -34,7 +35,7 @@ public class CasualService : Casual.CasualBase
         Program.Propagator.Inject(new PropagationContext(contextToInject, Baggage.Current), props, (props, key, value) =>
         {
             if (props.Headers == null)
-                props.Headers = new Dictionary<string, object>();
+                props.Headers = new Dictionary<string, object?>();
 
             props.Headers[key] = value;
         });
@@ -46,15 +47,16 @@ public class CasualService : Casual.CasualBase
 
         var body = $"{request.Content}->{nameof(Grpc3ToRabbitMQ4)}";
 
-        channel.BasicPublish(
+        await channel.BasicPublishAsync(
             exchange: RabbitMqHelper.DefaultExchangeName,
             routingKey: RabbitMqHelper.TestQueueName,
+            false,
             basicProperties: props,
             body: Encoding.UTF8.GetBytes(body));
 
-        return Task.FromResult(new TransmitResult
+        return new TransmitResult
         {
             Result = body
-        });
+        };
     }
 }

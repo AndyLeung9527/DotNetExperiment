@@ -1,6 +1,4 @@
-﻿namespace DotNetOpenTelemetry;
-
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using OpenTelemetry;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
@@ -8,6 +6,8 @@ using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using System.Diagnostics;
 using System.Diagnostics.Metrics;
+
+namespace DotNetOpenTelemetry;
 
 partial class Program
 {
@@ -261,7 +261,7 @@ partial class Program
         });
 
         // Custom metrics listener
-        using (MeterListener meterlistener = new MeterListener())
+        using (MeterListener meterlistener = new MeterListener())// 回收后注销OnMeasurementRecorded, 释放资源, 观察效果可先取消using
         {
             meterlistener.InstrumentPublished = (instrument, listener) =>
             {

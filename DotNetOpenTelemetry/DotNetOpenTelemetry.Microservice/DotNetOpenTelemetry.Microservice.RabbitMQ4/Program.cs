@@ -1,10 +1,9 @@
-﻿namespace DotNetOpenTelemetry.Microservice.RabbitMQ4;
-
-using OpenTelemetry;
-using OpenTelemetry.Context.Propagation;
+﻿using OpenTelemetry.Context.Propagation;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using System.Diagnostics;
+
+namespace DotNetOpenTelemetry.Microservice.RabbitMQ4;
 
 internal class Program
 {

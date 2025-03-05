@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using OpenTelemetry;
-using OpenTelemetry.Instrumentation.AspNetCore;
-using OpenTelemetry.Metrics;
+﻿using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using System.Diagnostics;
@@ -31,15 +28,15 @@ class Program
         // Configure OpenTelemetry Resources with the application name
         otel.ConfigureResource(resource => resource.AddService(builder.Environment.ApplicationName));
 
-        // Add metrics for ASP.NET Core and custom metrics and export to console
-        otel.WithMetrics(metrics => metrics
-            // Metrics provider from OpenTelemetry
-            .AddAspNetCoreInstrumentation()
-            // Metrics provides by ASP.NET Core in .NET 8
-            .AddMeter("Microsoft.AspNetCore.Hosting")
-            .AddMeter("Microsoft.AspNetCore.Server.Kestrel")
-            .AddMeter(customMeter.Name)
-            .AddConsoleExporter());
+        //// Add metrics for ASP.NET Core and custom metrics and export to console
+        //otel.WithMetrics(metrics => metrics
+        //    // Metrics provider from OpenTelemetry
+        //    .AddAspNetCoreInstrumentation()
+        //    // Metrics provides by ASP.NET Core in .NET 8
+        //    .AddMeter("Microsoft.AspNetCore.Hosting")
+        //    .AddMeter("Microsoft.AspNetCore.Server.Kestrel")
+        //    .AddMeter(customMeter.Name)
+        //    .AddConsoleExporter());
 
         // Add Tracing for ASP.NET Core and custom ActivitySource and export to console
         otel.WithTracing(tracing =>
