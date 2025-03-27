@@ -207,6 +207,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetResilience", "DotNetR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetObserver", "DotNetObserver\DotNetObserver.csproj", "{CCDD7FA7-D0B1-471B-B3F9-76DD6D1DEBC0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetCollectDumps", "DotNetCollectDumps\DotNetCollectDumps.csproj", "{291E309C-1861-4CC2-A003-F04AD8EFD1FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -509,6 +511,10 @@ Global
 		{CCDD7FA7-D0B1-471B-B3F9-76DD6D1DEBC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCDD7FA7-D0B1-471B-B3F9-76DD6D1DEBC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCDD7FA7-D0B1-471B-B3F9-76DD6D1DEBC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{291E309C-1861-4CC2-A003-F04AD8EFD1FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{291E309C-1861-4CC2-A003-F04AD8EFD1FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{291E309C-1861-4CC2-A003-F04AD8EFD1FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{291E309C-1861-4CC2-A003-F04AD8EFD1FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
