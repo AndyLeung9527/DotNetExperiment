@@ -1,9 +1,9 @@
-﻿using AspNetAuth.Identity.Dtos;
+﻿using System.Security.Claims;
+using AspNetAuth.Identity.Dtos;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace AspNetAuth.Identity.Controllers;
 
@@ -99,7 +99,7 @@ public class AccountController(UserManager<IdentityUser> userManager, SignInMana
             return Content("账户由于多次登录失败已锁定");
         }
 
-        // 若用户需要两步验证, 如果用户邮箱为空则无效, 会跳过两步验证直接登录成功
+        // 若用户需要两步验证, 如果用户邮箱和电话号码都为空则无效, 会跳过两步验证直接登录成功
         if (result.RequiresTwoFactor)
         {
             var user = await _userManager.FindByNameAsync(dto.UserName);
@@ -107,11 +107,13 @@ public class AccountController(UserManager<IdentityUser> userManager, SignInMana
             {
                 return BadRequest("用户不存在");
             }
+            // 用户邮箱不为空，则默认提供"Email"的provider；用户电话号码不为空，则默认提供"Phone"的provider
             var providers = await _userManager.GetValidTwoFactorProvidersAsync(user);
             if (!providers.Contains("Email"))
             {
                 return BadRequest("未配置邮箱两步验证");
             }
+            // 生成6位数字验证码
             var token = await _userManager.GenerateTwoFactorTokenAsync(user, "Email");
             return Content($"用户登录需要两步验证, token:{token}");
         }
