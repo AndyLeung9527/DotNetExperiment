@@ -22,7 +22,7 @@
     "customresource": {
       "type": "container.v0",
       "connectionString": "smtp://{customresource.bindings.smtp.host}:{customresource.bindings.smtp.port};Username={custom-username.value};Password={custom-password.value}",
-      "image": "docker.io/library/redis(\u955C\u50CF\u8DEF\u5F84/\u955C\u50CF\u540D):2.1.0(\u7248\u672C)",
+      "image": "docker.io/library/redis:latest",
       "env": {
         "CUSTOM_USER": "{custom-username.value}",
         "CUSTOM_PASS": "{custom-password.value}"
@@ -63,6 +63,43 @@
           "scheme": "https",
           "protocol": "tcp",
           "transport": "http"
+        }
+      }
+    },
+    "nginxversion": {
+      "type": "parameter.v0",
+      "value": "{nginxversion.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "mynginx": {
+      "type": "container.v1",
+      "build": {
+        "context": "dockerfiles/1",
+        "dockerfile": "dockerfiles/1/Dockerfile",
+        "args": {
+          "NGINX_VERSION": "{nginxversion.value}"
+        }
+      },
+      "bindMounts": [
+        {
+          "source": "../../../../../../../../VolumeMount/Nginx/home/web",
+          "target": "/home/web",
+          "readOnly": false
+        }
+      ]
+    },
+    "mysql": {
+      "type": "parameter.v0",
+      "connectionString": "{mysql.value}",
+      "value": "{mysql.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string",
+          "secret": true
         }
       }
     }

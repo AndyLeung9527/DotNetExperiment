@@ -21,9 +21,10 @@ public static class CustomResourceBuilderExtensions
         var resource = new CustomResource(name, userName?.Resource, passwordParameter);
 
         return builder.AddResource(resource)
-                        .WithImage("library/redis(镜像路径/镜像名)")
+                        .WithImage("library/redis")// 镜像路径/镜像名
                         .WithImageRegistry("docker.io")
-                        .WithImageTag("2.1.0(版本)")
+                        .WithImageTag("latest")// 镜像版本
+                        .WithImagePullPolicy(ImagePullPolicy.Default)// 镜像拉取策略
                         .WithHttpEndpoint(targetPort: 1080, port: httpPort, name: CustomResource.HttpEndpointName)
                         .WithEndpoint(targetPort: 1025, port: smtpPort, name: CustomResource.SmtpEndpointName)
                         .WithEnvironment(context =>
