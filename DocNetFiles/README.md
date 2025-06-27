@@ -555,6 +555,27 @@ public class Worker
 }
 ```
 
+### 10.单文件编译
+
+.net10预览版支持单文件编译运行，以下类文件直接执行`dotnet run main.cs`
+
+```c#
+#:sdk Microsoft.NET.Sdk.Web
+#:package Newtonsoft.Json 13.0.3
+
+var app = WebApplication.Create(args);
+
+app.MapGet("/", () =>
+{
+    var res = JsonConvert.SerializeObject(new { message = "Hello, World!" });
+    return res;
+});
+
+await app.RunAsync();
+
+// dotnet run main.cs
+```
+
 ## 二、性能调优篇
 
 ### 1.Span/Memory
