@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AspNetAspire.ServiceDefaults\AspNetAspire.ServiceDefaults.csproj" />
+  </ItemGroup>
+
 </Project>
