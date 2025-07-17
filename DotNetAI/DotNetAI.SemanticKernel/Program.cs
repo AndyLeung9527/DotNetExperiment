@@ -518,177 +518,177 @@ internal class Program
         var response = await chatCompletionService.GetChatMessageContentAsync("你好", kernel: kernel);
         Console.WriteLine(response);
     }
+}
 
-    // 插件类，包含一类别的可以被模型调用的函数
-    //
-    // 设计原则：
-    // 1.尽可能保持函数签名的简单性，比如函数名和参数数量（返回类型除外，模型不需要知道返回类型）
-    // 2.明确的参数类型，尽可能避免使用string参数类型，模型无法推断字符串的类型（因为参数都由模型生成，因此参数设计和类型尽量简单）
-    // 3.将需要用到的参数指定为必需参数
-    // 4.函数说明，帮助模型生成更准确的响应
-    public class LightsPlugin
-    {
-        private readonly List<LightModel> _lights =
-        [
-            new LightModel { Id = 1, Name = "客厅灯", IsOn = false },
+// 插件类，包含一类别的可以被模型调用的函数
+//
+// 设计原则：
+// 1.尽可能保持函数签名的简单性，比如函数名和参数数量（返回类型除外，模型不需要知道返回类型）
+// 2.明确的参数类型，尽可能避免使用string参数类型，模型无法推断字符串的类型（因为参数都由模型生成，因此参数设计和类型尽量简单）
+// 3.将需要用到的参数指定为必需参数
+// 4.函数说明，帮助模型生成更准确的响应
+public class LightsPlugin
+{
+    private readonly List<LightModel> _lights =
+    [
+        new LightModel { Id = 1, Name = "客厅灯", IsOn = false },
             new LightModel { Id = 2, Name = "卧室灯", IsOn = true },
             new LightModel { Id = 3, Name = "厨房灯", IsOn = false }
-        ];
+    ];
 
-        // 只有具有KernelFunction特性的函数才会发送到模型
-        // 由于LLMs主要基于Python代码进行训练，函数名称建议使用蛇形命名法（snake_case），有助于AI理解
-        [KernelFunction("get_lights")]
-        [Description("Gets a list of lights and their current state")]
-        public Task<List<LightModel>> GetLightsAsync() => Task.FromResult(_lights);
+    // 只有具有KernelFunction特性的函数才会发送到模型
+    // 由于LLMs主要基于Python代码进行训练，函数名称建议使用蛇形命名法（snake_case），有助于AI理解
+    [KernelFunction("get_lights")]
+    [Description("Gets a list of lights and their current state")]
+    public Task<List<LightModel>> GetLightsAsync() => Task.FromResult(_lights);
 
-        [KernelFunction("change_state")]
-        [Description("Changes the state of the light")]
-        // 提供具体的函数返回类型信息
-        /*
-        [Description("""
-                    Changes the state of the light and returns:
-                    {  
-                        "type": "object",
-                        "properties": {
-                            "id": { "type": "integer", "description": "Light ID" },
-                            "name": { "type": "string", "description": "Light name" },
-                            "is_on": { "type": "boolean", "description": "Is light on" },
-                            "brightness": { "type": "string", "enum": ["Low", "Medium", "High"], "description": "Brightness level" },
-                            "color": { "type": "string", "description": "Hex color code" }
-                        },
-                        "required": ["id", "name"]
-                        }
-                    """)]
-        */
-        // 提供简要的函数返回类型信息
-        /*
-        [Description("""
-                    Changes the state of the light and returns:
-                    id: light ID,
-                    name: light name,
-                    is_on: is light on,
-                    brightness: brightness level(Low, Medium, High),
-                    color: Hex color code.
-                    """)]
-        */
-        public Task<LightModel?> ChangeStateAsync(int id, bool isOn)
-        {
-            var light = _lights.FirstOrDefault(o => o.Id == id);
-            if (light is null)
-            {
-                return Task.FromResult<LightModel?>(null);
-            }
-
-            light.IsOn = isOn;
-
-            return Task.FromResult<LightModel?>(light);
-        }
-    }
-
-    public class LightModel
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public bool IsOn { get; set; }
-    }
-
-    /// <summary>
-    /// 函数调用筛选器
-    /// 每次调用KernelFunction的函数时执行
-    /// </summary>
-    public sealed class CustomFunctionInvocationFilter(ILogger<CustomFunctionInvocationFilter> logger) : IFunctionInvocationFilter
-    {
-        public async Task OnFunctionInvocationAsync(FunctionInvocationContext context, Func<FunctionInvocationContext, Task> next)
-        {
-            logger.LogInformation("------ FunctionInvoking - {PluginName}.{FunctionName} ------", context.Function.PluginName, context.Function.Name);
-
-            // 在筛选器中加入用户同意业务示例，在调用函数前询问用户是否同意执行当前操作
-            /*
-            {
-                if (context.Function.PluginName == "DynamicsPlugin" && context.Function.Name == "create_order")
-                {
-                    Console.WriteLine("System >AI代理需要创建订单，是否同意？(Y/N)");
-                    string shouldProceed = Console.ReadLine()!;
-
-                    if (shouldProceed != "Y")
-                    {
-                        // 当函数被取消或失败时，应向AI提供有意义的错误消息，以便模型做出适当响应
-                        context.Result = new FunctionResult(context.Result, "用户不允许当前的订单创建操作");
-                        return;
+    [KernelFunction("change_state")]
+    [Description("Changes the state of the light")]
+    // 提供具体的函数返回类型信息
+    /*
+    [Description("""
+                Changes the state of the light and returns:
+                {  
+                    "type": "object",
+                    "properties": {
+                        "id": { "type": "integer", "description": "Light ID" },
+                        "name": { "type": "string", "description": "Light name" },
+                        "is_on": { "type": "boolean", "description": "Is light on" },
+                        "brightness": { "type": "string", "enum": ["Low", "Medium", "High"], "description": "Brightness level" },
+                        "color": { "type": "string", "description": "Hex color code" }
+                    },
+                    "required": ["id", "name"]
                     }
+                """)]
+    */
+    // 提供简要的函数返回类型信息
+    /*
+    [Description("""
+                Changes the state of the light and returns:
+                id: light ID,
+                name: light name,
+                is_on: is light on,
+                brightness: brightness level(Low, Medium, High),
+                color: Hex color code.
+                """)]
+    */
+    public Task<LightModel?> ChangeStateAsync(int id, bool isOn)
+    {
+        var light = _lights.FirstOrDefault(o => o.Id == id);
+        if (light is null)
+        {
+            return Task.FromResult<LightModel?>(null);
+        }
+
+        light.IsOn = isOn;
+
+        return Task.FromResult<LightModel?>(light);
+    }
+}
+
+public class LightModel
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public bool IsOn { get; set; }
+}
+
+/// <summary>
+/// 函数调用筛选器
+/// 每次调用KernelFunction的函数时执行
+/// </summary>
+public sealed class CustomFunctionInvocationFilter(ILogger<CustomFunctionInvocationFilter> logger) : IFunctionInvocationFilter
+{
+    public async Task OnFunctionInvocationAsync(FunctionInvocationContext context, Func<FunctionInvocationContext, Task> next)
+    {
+        logger.LogInformation("------ FunctionInvoking - {PluginName}.{FunctionName} ------", context.Function.PluginName, context.Function.Name);
+
+        // 在筛选器中加入用户同意业务示例，在调用函数前询问用户是否同意执行当前操作
+        /*
+        {
+            if (context.Function.PluginName == "DynamicsPlugin" && context.Function.Name == "create_order")
+            {
+                Console.WriteLine("System >AI代理需要创建订单，是否同意？(Y/N)");
+                string shouldProceed = Console.ReadLine()!;
+
+                if (shouldProceed != "Y")
+                {
+                    // 当函数被取消或失败时，应向AI提供有意义的错误消息，以便模型做出适当响应
+                    context.Result = new FunctionResult(context.Result, "用户不允许当前的订单创建操作");
+                    return;
                 }
             }
-            */
-
-            // 执行下一个筛选器或函数调用
-            await next(context);
-
-            logger.LogInformation("------ FunctionInvoked - {PluginName}.{FunctionName} ------", context.Function.PluginName, context.Function.Name);
         }
+        */
+
+        // 执行下一个筛选器或函数调用
+        await next(context);
+
+        logger.LogInformation("------ FunctionInvoked - {PluginName}.{FunctionName} ------", context.Function.PluginName, context.Function.Name);
+    }
+}
+
+/// <summary>
+/// 自动函数调用筛选器
+/// 每次调用自动函数KernelFunction的函数时执行
+/// </summary>
+public sealed class CustomAutoFunctionInvocationFilter(ILogger<CustomAutoFunctionInvocationFilter> logger) : IAutoFunctionInvocationFilter
+{
+    public async Task OnAutoFunctionInvocationAsync(AutoFunctionInvocationContext context, Func<AutoFunctionInvocationContext, Task> next)
+    {
+        logger.LogInformation("------ AutoFunctionInvoking - {PluginName}.{FunctionName} ------", context.Function.PluginName, context.Function.Name);
+
+        // 执行下一个筛选器或函数调用
+        await next(context);
+
+        if (false)
+        {
+            // 终止后续所有自动函数的调用
+            context.Terminate = true;
+        }
+
+        // 在自动函数调用筛选器中提供函数返回类型信息（只支持自动函数筛选器）
+        /*
+        {
+            // 带有返回类型信息的函数调用结果
+            FunctionResultWithSchema resultWithSchema = new()
+            {
+                Value = context.Result.GetValue<object>(),                  // 函数调用的返回结果
+                Schema = context.Function.Metadata.ReturnParameter?.Schema  // 函数的返回类型信息
+            };
+            context.Result = new FunctionResult(context.Result, resultWithSchema); // 将结果设置为带有类型信息的结果
+        }
+        */
+
+        logger.LogInformation("------ AutoFunctionInvoked - {PluginName}.{FunctionName} ------", context.Function.PluginName, context.Function.Name);
     }
 
-    /// <summary>
-    /// 自动函数调用筛选器
-    /// 每次调用自动函数KernelFunction的函数时执行
-    /// </summary>
-    public sealed class CustomAutoFunctionInvocationFilter(ILogger<CustomAutoFunctionInvocationFilter> logger) : IAutoFunctionInvocationFilter
+    private sealed class FunctionResultWithSchema
     {
-        public async Task OnAutoFunctionInvocationAsync(AutoFunctionInvocationContext context, Func<AutoFunctionInvocationContext, Task> next)
-        {
-            logger.LogInformation("------ AutoFunctionInvoking - {PluginName}.{FunctionName} ------", context.Function.PluginName, context.Function.Name);
-
-            // 执行下一个筛选器或函数调用
-            await next(context);
-
-            if (false)
-            {
-                // 终止后续所有自动函数的调用
-                context.Terminate = true;
-            }
-
-            // 在自动函数调用筛选器中提供函数返回类型信息（只支持自动函数筛选器）
-            /*
-            {
-                // 带有返回类型信息的函数调用结果
-                FunctionResultWithSchema resultWithSchema = new()
-                {
-                    Value = context.Result.GetValue<object>(),                  // 函数调用的返回结果
-                    Schema = context.Function.Metadata.ReturnParameter?.Schema  // 函数的返回类型信息
-                };
-                context.Result = new FunctionResult(context.Result, resultWithSchema); // 将结果设置为带有类型信息的结果
-            }
-            */
-
-            logger.LogInformation("------ AutoFunctionInvoked - {PluginName}.{FunctionName} ------", context.Function.PluginName, context.Function.Name);
-        }
-
-        private sealed class FunctionResultWithSchema
-        {
-            public object? Value { get; set; }
-            public KernelJsonSchema? Schema { get; set; }
-        }
+        public object? Value { get; set; }
+        public KernelJsonSchema? Schema { get; set; }
     }
+}
 
-    /// <summary>
-    /// 提示词提交模型筛选器
-    /// 在提示词发送到模型时执行（kernel.InvokePromptAsync才生效）
-    /// </summary>
-    public sealed class CustomPromptRenderFilter(ILogger<CustomPromptRenderFilter> logger) : IPromptRenderFilter
+/// <summary>
+/// 提示词提交模型筛选器
+/// 在提示词发送到模型时执行（kernel.InvokePromptAsync才生效）
+/// </summary>
+public sealed class CustomPromptRenderFilter(ILogger<CustomPromptRenderFilter> logger) : IPromptRenderFilter
+{
+    public async Task OnPromptRenderAsync(PromptRenderContext context, Func<PromptRenderContext, Task> next)
     {
-        public async Task OnPromptRenderAsync(PromptRenderContext context, Func<PromptRenderContext, Task> next)
+        logger.LogInformation("------ PromptRendering - {PluginName}.{FunctionName}.{RenderedPrompt} ------", context.Function.PluginName, context.Function.Name, context.RenderedPrompt);
+
+        // 执行下一个筛选器
+        await next(context);
+
+        if (false)
         {
-            logger.LogInformation("------ PromptRendering - {PluginName}.{FunctionName}.{RenderedPrompt} ------", context.Function.PluginName, context.Function.Name, context.RenderedPrompt);
-
-            // 执行下一个筛选器
-            await next(context);
-
-            if (false)
-            {
-                // 在提交模型前重写提示词
-                context.RenderedPrompt = "你好";
-            }
-
-            logger.LogInformation("------ PromptRendered - {PluginName}.{FunctionName}.{RenderedPrompt} ------", context.Function.PluginName, context.Function.Name, context.RenderedPrompt);
+            // 在提交模型前重写提示词
+            context.RenderedPrompt = "你好";
         }
+
+        logger.LogInformation("------ PromptRendered - {PluginName}.{FunctionName}.{RenderedPrompt} ------", context.Function.PluginName, context.Function.Name, context.RenderedPrompt);
     }
 }

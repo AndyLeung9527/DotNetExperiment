@@ -54,10 +54,10 @@ internal class Program
             //            new VectorStoreKeyProperty("HotelId",typeof(ulong)),
             //            new VectorStoreDataProperty("HotelName", typeof(string)) { IsIndexed = true },
             //            new VectorStoreDataProperty("Description", typeof(string)) { IsFullTextIndexed = true },
-            //            new VectorStoreVectorProperty("DescriptionEmbedding", typeof(float), dimensions: 6) { DistanceFunction = DistanceFunction.CosineSimilarity, IndexKind = IndexKind.Hnsw }
+            //            new VectorStoreVectorProperty("DescriptionEmbedding", typeof(float), dimensions: 1536) { DistanceFunction = DistanceFunction.CosineSimilarity, IndexKind = IndexKind.Hnsw }
 
             //            // 自动生成向量方式4：在向量属性定义中注册的嵌入向量生成器
-            //            //new VectorStoreVectorProperty("DescriptionEmbedding", typeof(float), dimensions: 6)
+            //            //new VectorStoreVectorProperty("DescriptionEmbedding", typeof(float), dimensions: 1536)
             //            //{ 
             //            //    EmbeddingGenerator = textEmbeddingGenerationService.AsEmbeddingGenerator(),
             //            //}
@@ -175,10 +175,10 @@ public class Hotel
     public string Description { get; set; } = string.Empty;
 
     // 向量数据
-    // Dimensions: 向量的维度
+    // Dimensions: 向量的维度，需要符合向量模型的输出范围
     // DistanceFunction：CosineSimilarity（余弦相似度）是常用的向量距离函数
     // IndexKind：Hnsw（Hierarchical Navigable Small World）是常用的向量索引类型
-    [VectorStoreVector(Dimensions: 6, DistanceFunction = DistanceFunction.CosineSimilarity, IndexKind = IndexKind.Hnsw)]
+    [VectorStoreVector(Dimensions: 1536, DistanceFunction = DistanceFunction.CosineSimilarity, IndexKind = IndexKind.Hnsw)]
     public ReadOnlyMemory<float>? DescriptionEmbedding { get; set; }
 
     // 属性编制索引

@@ -17,7 +17,7 @@ internal class Program
     async static Task Main(string[] args)
     {
 
-        var builder = Kernel.CreateBuilder().AddOpenAIChatCompletion(
+        var kernel = Kernel.CreateBuilder().AddOpenAIChatCompletion(
             modelId: CHAT_MODEL,
             endpoint: new Uri(URL),
             apiKey: API_KEY
@@ -25,8 +25,7 @@ internal class Program
             modelId: VECTOR_MODEL,
             apiKey: API_KEY,
             httpClient: new HttpClient { BaseAddress = new Uri(URL) }
-        );
-        var kernel = builder.Build();
+        ).Build();
 
         // 提示词模板使用Handlebars语法，SearchPlugin-DemoSearch为搜索插件和函数名称，query为输入变量
         var template = """
