@@ -1,5 +1,6 @@
 ﻿using Aspire.Hosting;
 using Aspire.Hosting.ApplicationModel;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Custom.Hosting;
 
@@ -19,6 +20,27 @@ public static class CustomResourceBuilderExtensions
             ParameterResourceBuilderExtensions.CreateDefaultPasswordParameter(builder, $"{name}-password");
 
         var resource = new CustomResource(name, userName?.Resource, passwordParameter);
+
+        // 订阅AppHost事件
+        // 事件按顺序发布
+        // 1. BeforeStartEvent（主机启动前触发）
+        // 2. AfterEndpointsAllocatedEvent（主机分配终结点后触发）
+        // 3. AfterResourcesCreatedEvent（主机创建资源后触发）
+        builder.Eventing.Subscribe<BeforeStartEvent>(
+            static (@event, cancellationToken) =>
+            {
+                return Task.CompletedTask;
+            });
+
+        // 订阅Resource事件
+        builder.Eventing.Subscribe<ResourceReadyEvent>(
+            resource,
+            (@event, cancellationToken) =>
+            {
+                var logger = @event.Services.GetRequiredService<ResourceLoggerService>().GetLogger(resource);
+
+                return Task.CompletedTask;
+            });
 
         return builder.AddResource(resource)
                         .WithImage("library/redis")// 镜像路径/镜像名

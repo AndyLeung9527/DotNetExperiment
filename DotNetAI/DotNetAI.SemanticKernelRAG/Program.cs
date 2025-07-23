@@ -16,7 +16,6 @@ internal class Program
 
     async static Task Main(string[] args)
     {
-
         var kernel = Kernel.CreateBuilder().AddOpenAIChatCompletion(
             modelId: CHAT_MODEL,
             endpoint: new Uri(URL),
