@@ -229,6 +229,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetAI.SemanticKernelAgen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetAI.SemanticKernelProcess", "DotNetAI\DotNetAI.SemanticKernelProcess\DotNetAI.SemanticKernelProcess.csproj", "{9A884F29-D377-4E75-BB20-C6F5E8A9FA59}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetRateLimiting", "AspNetRateLimiting\AspNetRateLimiting.csproj", "{2C2DB718-6C52-4F51-849A-F7F2806E17C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -567,6 +569,10 @@ Global
 		{9A884F29-D377-4E75-BB20-C6F5E8A9FA59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A884F29-D377-4E75-BB20-C6F5E8A9FA59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A884F29-D377-4E75-BB20-C6F5E8A9FA59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C2DB718-6C52-4F51-849A-F7F2806E17C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C2DB718-6C52-4F51-849A-F7F2806E17C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C2DB718-6C52-4F51-849A-F7F2806E17C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C2DB718-6C52-4F51-849A-F7F2806E17C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
