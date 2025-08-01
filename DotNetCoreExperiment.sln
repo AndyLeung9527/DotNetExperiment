@@ -231,6 +231,43 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetAI.SemanticKernelProc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetRateLimiting", "AspNetRateLimiting\AspNetRateLimiting.csproj", "{2C2DB718-6C52-4F51-849A-F7F2806E17C5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetFiles", "DotNetFiles", "{A1357041-BFE5-4B9A-B88F-685C123EB6B6}"
+	ProjectSection(SolutionItems) = preProject
+		DotNetFiles\README.md = DotNetFiles\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetTemplate", "DotNetTemplate", "{31046E54-8323-4B41-AB05-2F1E48C1BF2C}"
+	ProjectSection(SolutionItems) = preProject
+		DotNetTemplate\AdatumCorporation.Utility.Templates.csproj = DotNetTemplate\AdatumCorporation.Utility.Templates.csproj
+		DotNetTemplate\README.md = DotNetTemplate\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetTemplate.Item", "DotNetTemplate.Item", "{DE910A57-926B-4681-95F9-2571A8262C0A}"
+	ProjectSection(SolutionItems) = preProject
+		DotNetTemplate\DotNetTemplate.Item\StringExtensions.cs = DotNetTemplate\DotNetTemplate.Item\StringExtensions.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".template.config", ".template.config", "{9BA1282E-2FA5-48FF-8988-6626E9E1BABD}"
+	ProjectSection(SolutionItems) = preProject
+		DotNetTemplate\DotNetTemplate.Item\.template.config\template.json = DotNetTemplate\DotNetTemplate.Item\.template.config\template.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNetTemplate.Project", "DotNetTemplate.Project", "{7D172252-EE20-425D-9018-8130B35B5437}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".template.config", ".template.config", "{31176981-B85E-458C-A2B0-B1B236FD2E56}"
+	ProjectSection(SolutionItems) = preProject
+		DotNetTemplate\DocNetTemplate.Project\.template.config\template.json = DotNetTemplate\DocNetTemplate.Project\.template.config\template.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetTemplate.Project.Demo", "DotNetTemplate\DocNetTemplate.Project\DotNetTemplate.Project.Demo\DotNetTemplate.Project.Demo.csproj", "{F6B9B65A-A425-4350-BA3F-EC7ED7F18003}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{584294C6-8B89-4FC2-8C93-129F0BE94F26}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleTemplate", "SampleTemplate", "{82D32945-BA48-4BCD-8EF3-6FBCAD6577F4}"
+	ProjectSection(SolutionItems) = preProject
+		DotNetTemplate\content\SampleTemplate\placeholder.txt = DotNetTemplate\content\SampleTemplate\placeholder.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -573,6 +610,10 @@ Global
 		{2C2DB718-6C52-4F51-849A-F7F2806E17C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C2DB718-6C52-4F51-849A-F7F2806E17C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C2DB718-6C52-4F51-849A-F7F2806E17C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6B9B65A-A425-4350-BA3F-EC7ED7F18003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6B9B65A-A425-4350-BA3F-EC7ED7F18003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6B9B65A-A425-4350-BA3F-EC7ED7F18003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6B9B65A-A425-4350-BA3F-EC7ED7F18003}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -653,6 +694,13 @@ Global
 		{E1B9F33D-E8D4-4F6F-86EB-F7FDC1900A20} = {5594344A-D1DE-40E6-B355-9262C99A22B1}
 		{41152BDD-8AFB-40E7-9AFD-CCC1E5317E0E} = {5594344A-D1DE-40E6-B355-9262C99A22B1}
 		{9A884F29-D377-4E75-BB20-C6F5E8A9FA59} = {5594344A-D1DE-40E6-B355-9262C99A22B1}
+		{DE910A57-926B-4681-95F9-2571A8262C0A} = {31046E54-8323-4B41-AB05-2F1E48C1BF2C}
+		{9BA1282E-2FA5-48FF-8988-6626E9E1BABD} = {DE910A57-926B-4681-95F9-2571A8262C0A}
+		{7D172252-EE20-425D-9018-8130B35B5437} = {31046E54-8323-4B41-AB05-2F1E48C1BF2C}
+		{31176981-B85E-458C-A2B0-B1B236FD2E56} = {7D172252-EE20-425D-9018-8130B35B5437}
+		{F6B9B65A-A425-4350-BA3F-EC7ED7F18003} = {7D172252-EE20-425D-9018-8130B35B5437}
+		{584294C6-8B89-4FC2-8C93-129F0BE94F26} = {31046E54-8323-4B41-AB05-2F1E48C1BF2C}
+		{82D32945-BA48-4BCD-8EF3-6FBCAD6577F4} = {584294C6-8B89-4FC2-8C93-129F0BE94F26}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2A6B72B4-0A0E-4CB4-8C72-65FA2178875B}

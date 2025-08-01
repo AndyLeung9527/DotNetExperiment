@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Me", // 作者
+  "classifications": [ // dotnet new list的标记列
+    "Common",
+    "Code"
+  ],
+  "identity": "ExampleTemplate.StringExtensions",
+  "name": "Example templates: string extensions",
+  "shortName": "stringext",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "symbols": { // 模板参数
+    "ClassName": { // 类名参数
+      "type": "parameter", // 参数类型，必须是parameter
+      "description": "The name of the code file and class.",
+      "datatype": "text",
+      "replaces": "StringExtensions",
+      "fileRename": "StringExtensions",
+      "defaultValue": "StringExtensions" // 默认值
+    }
+  }
+}
+
+/*
+在模板配置目录（.template.config）的父目录（DotNetTemplate.Item）下运行
+安装模板（卸载则改为uninstall）：
+Windows系统：dotnet new install .\
+Linux/Mac系统：dotnet new install ./
+*/

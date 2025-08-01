@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Me",
+  "classifications": [
+    "Common",
+    "Console"
+  ],
+  "identity": "ExampleTemplate.AsyncProject",
+  "name": "Example templates: async project",
+  "shortName": "consoleasync",
+  // DotNetTemplate.Project.Demo sourceName会在每个文件名和文件内容中搜索，替换为用户使用的模板名称
+  "sourceName": "DotNetTemplate.Project.Demo",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  }
+}
