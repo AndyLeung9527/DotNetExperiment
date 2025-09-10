@@ -53,7 +53,7 @@ namespace DotNetChannel
                 channel.Writer.Complete();//Complete表示不再向通道写入数据
 
                 //一次读取一个
-                while (await channel.Reader.WaitToReadAsync())
+                while (await channel.Reader.WaitToReadAsync())// 会阻塞当前线程直到有数据可读或通道关闭
                 {
                     if (channel.Reader.TryRead(out var item))
                     {
@@ -61,9 +61,9 @@ namespace DotNetChannel
                     }
                 }
                 //一次全部读出
-                while (await channel.Reader.WaitToReadAsync())
+                while (await channel.Reader.WaitToReadAsync())// 会阻塞当前线程直到有数据可读或通道关闭
                 {
-                    await foreach (var item in channel.Reader.ReadAllAsync())
+                    await foreach (var item in channel.Reader.ReadAllAsync())// 会阻塞当前线程直到有数据可读或通道关闭
                     {
                         Console.WriteLine(item);
                     }
