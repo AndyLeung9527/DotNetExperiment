@@ -57,8 +57,23 @@ internal class Program
                 throw new Exception();
             });
 
-            // 使用HttpClient时可直接使用官方标准的Resilience管道, 需要安装nuget包Microsoft.Extensions.Http.Resilience
+            // 使用HttpClient时可直接使用官方标准的Resilience管道或自定义ResilienceHandler, 需要安装nuget包Microsoft.Extensions.Http.Resilience
             // services.AddHttpClient<T>().AddStandardResiliencePipelineHandler();
+            // services.AddHttpClient<T>().AddResilienceHandler("管道名称",(configure, context) =>
+            // {
+            //     configure.AddRetry(new()
+            //     {
+            //         ShouldHandle = args => args.Outcome switch
+            //         {
+            //             { Exception: HttpRequestException } => PredicateResult.True(),
+            //             { Result.StatusCode: HttpStatusCode.RequestTimeout } => PredicateResult.True(),
+            //             { Result.StatusCode: >= HttpStatusCode.InternalServerError } => PredicateResult.True(),
+            //             _ => PredicateResult.False()
+            //         },
+            //         MaxRetryAttempts = MaxRetryAttempts,
+            //         Delay = Delay
+            //     });
+            // });
         }
 
         Console.WriteLine("执行完成");

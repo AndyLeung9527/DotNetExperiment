@@ -576,7 +576,30 @@ await app.RunAsync();
 // dotnet run main.cs
 ```
 
-## 二、性能调优篇
+## 二、Asp.Net篇
+
+### 1.响应压缩
+
+应只对未压缩的响应内容进行压缩，比如JavaScript、Html、Json等，若是已压缩内容，比如PNG，就无需再次进行压缩响应处理。
+
+若客户端可以处理压缩内容，会通过请求头`Accept-Encoding`告知服务器，如`gzip, deflate, br`。而当服务器响应压缩内容时，也必须在` Content-Encoding`中返回压缩响应的编码信息，如`gzip, deflate, br`。
+
+Asp.Net默认框架支持`gzip`和`br`，代码如下：
+
+```c#
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+});
+```
+
+```c#
+app.UseResponseCompression();
+```
+
+测试效果时，可以通过修改`Accept-Encoding`请求头，观察`Content-Encoding`响应头和实际内容大小
+
+## 三、性能调优篇
 
 ### 1.Span/Memory
 
@@ -689,7 +712,7 @@ public class HighPrecisionTimer
     }
 ```
 
-## 三、EFCore
+## 四、EFCore
 
 ### 1.原理
 
@@ -1252,7 +1275,7 @@ select * from t where ROWNUM <= 3
 
 当查询的总条数大于Int长度时，应使用LongCount()
 
-## 四、故障
+## 五、故障
 
 ### 1..NET Framework引用缺失
 
@@ -1302,7 +1325,7 @@ select * from t where ROWNUM <= 3
 
 Ⅳ.可直接调试打开项目，看缺失详情
 
-## 五、工具清单
+## 六、工具清单
 
 Java+SpringBoot: IntelliJ IDEA/Maven
 

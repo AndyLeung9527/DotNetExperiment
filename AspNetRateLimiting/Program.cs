@@ -54,10 +54,12 @@ public class Program
                     policyName: TokenBucketPolicyName,
                     configureOptions: options =>
                     {
-                        options.TokenLimit = 100;
-                        options.AutoReplenishment = true; // 到ReplenishmentPeriod时间则自动补充令牌
-                        options.ReplenishmentPeriod = TimeSpan.FromSeconds(10);
-                        options.TokensPerPeriod = 20;
+                        options.TokenLimit = 100; //最大令牌数
+                        // true：限流器会自动按照ReplenishmentPeriod定时补充令牌，false：需要手动调用TryReplenish()来补充
+                        // 在asp.net中，无论true或者false，当请求到来时都会触发补充机制，通过补充速率计算当前的可用令牌。区别是，true会定时补充或者请求到来时触发补充，false则只会在请求到来时触发补充或者手动调用TryReplenish()来补充
+                        options.AutoReplenishment = true;
+                        options.ReplenishmentPeriod = TimeSpan.FromSeconds(10); // 补充令牌的时间间隔
+                        options.TokensPerPeriod = 20;// 每次补充的令牌数，控制令牌的生成速率，平均速率 = TokensPerPeriod / ReplenishmentPeriod
                     });
 
                 // 并发请求限流器
