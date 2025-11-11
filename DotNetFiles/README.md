@@ -249,7 +249,7 @@ namespace Demo
 
 * 不要在长生命周期的对象中引用比它短的生命周期的对象，在Asp.Net Core中，这样做默认会抛异常
 
-* 选择：如果类无状态，建议为Singleton；如果类有状态，且有Scope控制，建议为Scope，通常有Scope控制下的代码都是运行在同一个线程中，没有并发修改问题；而使用Transient则要谨慎
+* 选择：如果类无状态，建议为Singleton；如果类有状态，且有Scope控制，建议为Scope，通常有Scope控制下的代码都是运行在同一个线程中，没有并发修改问题（在Asp.Net Core中，每次请求到来会生成一个新的Scope，直至请求结束）；而使用Transient则要谨慎
 
 各生命周期示例如下：
 
@@ -372,6 +372,8 @@ namespace Demo
             IServiceCollection services = new ServiceCollection();
             services.AddScoped<Obj>();
             services.AddOptions().Configure<ConfigObj>(e => configurationRoot.GetSection("str2").Bind(e));
+            // 也可使用以下方法，它返回OptionsBuilder，可以继续对Options进行链式调用，比如.ValidateOnStart()，需引用nuget包：Microsoft.Extensions.Options.ConfigurationExtensions
+            // services.AddOptions<ConfigObj>().BindConfiguration("str2");
             IServiceProvider serviceProvider = services.BuildServiceProvider();
 
             using var scope = serviceProvider.CreateScope();
@@ -394,7 +396,7 @@ namespace Demo
 }
 ```
 
-当应用运行中修改配置文件时，IOptions不会读取到新的值；IOptionsMonitor会在配置改变时马上读取新的值；IOptionsSnapshot会在一个范围内(比如Asp.Net Core同一个请求中)保持一致，建议使用
+当应用运行中修改配置文件时，IOptions不会读取到新的值；IOptionsMonitor会在配置改变时马上读取新的值；IOptionsSnapshot会在当前Scope内(比如Asp.Net Core同一个请求中)保持一致，建议使用。读取新值的原理是通过文件变化监听，请注意容器化部署时，宿主机系统跟容器实例系统不一致时，是否可能导致监听失效。
 
 * 命令行配置
 
