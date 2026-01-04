@@ -1277,6 +1277,16 @@ select * from t where ROWNUM <= 3
 
 当查询的总条数大于Int长度时，应使用LongCount()
 
+#### Ⅳ.使用手动生成的主键
+
+当主键是EfCore支持自动生成的值类型时需要注意，比如`int`、`long`、`Guid`等，当这些主键是手动生成时需要注明`ValueGeneratedNever()`，否则手动生成键值时，会被EfCore当成是`Modified`类型，导致添加失败：
+
+```
+The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded.
+```
+
+> 可在`SaveChangesAsync()`前使用`Console.WriteLine(dbcontenxt.ChangeTracker.DebugView.LongView);`观察实体跟踪情况
+
 ## 五、故障
 
 ### 1..NET Framework引用缺失
