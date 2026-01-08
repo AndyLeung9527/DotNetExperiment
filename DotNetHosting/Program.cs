@@ -14,6 +14,13 @@ class Program
     static void Main(string[] args)
     {
         var collector = new Collector();
+        //使用HostBuilder构建主机
+        //不加载环境变量
+        //不加载launchSettings.json
+        //不加载appsettings.json
+        //不设置EnvironmentName
+        //因此下述的context.HostingEnvironment.EnvironmentName是Production（默认值）
+        //可使用Host.CreateDefaultBuilder(args)代替，它会加载上述内容，开箱即用
         var host = new HostBuilder()
             .ConfigureHostConfiguration(builder => builder.AddCommandLine(args))
             .ConfigureAppConfiguration((context, builder) =>
